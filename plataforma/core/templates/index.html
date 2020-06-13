@@ -1,0 +1,18 @@
+<center>
+    <h1>Index da plataforma Fatec</h1>
+</center>
+<br>
+<br>
+Logado como: {{user}}
+<br>
+<br>
+<a href="{% url 'core:core_index_aluno' %}"> Área do aluno </a>
+<br>
+<a href="{% url 'core:core_index_professor' %}"> Área do professor </a>
+<br>
+<a href="{% url 'core:core_index_empresa' %}"> Área da empresa </a>
+
+<br>
+<br>
+<br>
+<a href="{% url 'core:logout' %}"> Logout </a>
