@@ -55,6 +55,7 @@ class coreGetIndex(TestCase):
         self.assertEqual(302, self.resp.status_code)
 
     def test_template_used(self):
+        self.assertTemplateUsed(self.resp2, 'base.html')
         self.assertTemplateUsed(self.resp2, 'login.html')
 
     def test_200_response(self):
@@ -69,6 +70,7 @@ class coreGetLoginOk(TestCase):
         self.assertEqual(200, self.resp.status_code)
 
     def test_template_used(self):
+        self.assertTemplateUsed(self.resp, 'base.html')
         self.assertTemplateUsed(self.resp, 'login.html')
 
 
@@ -85,6 +87,7 @@ class corePostLoginOK(TestCase, CreateTestUser):
         self.assertEqual(200, self.resp2.status_code)
 
     def test_template_used(self):
+        self.assertTemplateUsed(self.resp2, 'base.html')
         self.assertTemplateUsed(self.resp2, 'index.html')
 
 
@@ -108,9 +111,11 @@ class corePostLoginFail(TestCase, CreateTestUser):
         self.assertEqual(200, self.resp3.status_code)
 
     def test_template_used_1(self):
+        self.assertTemplateUsed(self.resp2, 'base.html')
         self.assertTemplateUsed(self.resp2, 'login.html')
 
     def test_template_used_2(self):
+        self.assertTemplateUsed(self.resp3, 'base.html')
         self.assertTemplateUsed(self.resp3, 'login.html')
 
 
@@ -120,6 +125,7 @@ class coreGetIndexAlunoFail(TestCase):
         self.resp2 = self.client.get(r('core:core_index_aluno'), follow=True)
 
     def test_template_used(self):
+        self.assertTemplateUsed(self.resp2, 'base.html')
         self.assertTemplateUsed(self.resp2, 'login.html')
 
     def test_302_response(self):
@@ -157,6 +163,7 @@ class coreGetIndexProfessorFail(TestCase):
             r('core:core_index_professor'), follow=True)
 
     def test_template_used(self):
+        self.assertTemplateUsed(self.resp2, 'base.html')
         self.assertTemplateUsed(self.resp2, 'login.html')
 
     def test_302_response(self):
@@ -195,6 +202,7 @@ class coreGetIndexEmpresaFail(TestCase):
             r('core:core_index_empresa'), follow=True)
 
     def test_template_used(self):
+        self.assertTemplateUsed(self.resp2, 'base.html')
         self.assertTemplateUsed(self.resp2, 'login.html')
 
     def test_302_response(self):
