@@ -137,6 +137,10 @@ class coreGetIndexAlunoOk(TestCase, CreateTestUser):
         self.resp2 = self.client.get(r('core:core_index_aluno'), follow=True)
 
     def test_template_used(self):
+        self.assertTemplateUsed(self.resp2, 'base.html')
+        self.assertTemplateUsed(self.resp2, 'rodape.html')
+        self.assertTemplateUsed(self.resp2, 'aluno_sidebar.html')
+        self.assertTemplateUsed(self.resp2, 'aluno_topbar.html')
         self.assertTemplateUsed(self.resp2, 'aluno_index.html')
 
     def test_200_response_1(self):
@@ -171,6 +175,10 @@ class coreGetIndexProfessorOk(TestCase, CreateTestUser):
             r('core:core_index_professor'), follow=True)
 
     def test_template_used(self):
+        self.assertTemplateUsed(self.resp2, 'base.html')
+        self.assertTemplateUsed(self.resp2, 'rodape.html')
+        self.assertTemplateUsed(self.resp2, 'professor_sidebar.html')
+        self.assertTemplateUsed(self.resp2, 'professor_topbar.html')
         self.assertTemplateUsed(self.resp2, 'professor_index.html')
 
     def test_200_response_1(self):
@@ -205,6 +213,10 @@ class coreGetIndexEmpresaOk(TestCase, CreateTestUser):
             r('core:core_index_empresa'), follow=True)
 
     def test_template_used(self):
+        self.assertTemplateUsed(self.resp2, 'base.html')
+        self.assertTemplateUsed(self.resp2, 'rodape.html')
+        self.assertTemplateUsed(self.resp2, 'empresa_sidebar.html')
+        self.assertTemplateUsed(self.resp2, 'empresa_topbar.html')
         self.assertTemplateUsed(self.resp2, 'empresa_index.html')
 
     def test_200_response_1(self):
