@@ -13,6 +13,19 @@ view_in_test = 'estagio:upload_convenio'
 template_in_test = 'upload_convenio.html'
 
 
+class uploadConvenioEstagioNoAuthGet(TestCase):
+    def setUp(self):
+        self.resp = self.client.get(r(view_in_test))
+        self.resp2 = self.client.get(r(view_in_test), follow=True)
+
+    def test_template(self):
+        self.assertTemplateUsed(self.resp2, 'login.html')
+
+    def test_200_template_home(self):
+        self.assertEqual(302, self.resp.status_code)
+        self.assertEqual(200, self.resp2.status_code)
+
+
 @override_settings(DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage')
 class uploadConvenioEstagioGet(TestCase, CreateTestUser):
     def setUp(self):
@@ -28,6 +41,8 @@ class uploadConvenioEstagioGet(TestCase, CreateTestUser):
 
     def test_html(self):
         tags = (
+            ('Módulo Empresa', 1),
+            ('Módulo Professor', 0),
             ('<form', 2),
             ('<input', 5),
             ('type="submit"', 1)

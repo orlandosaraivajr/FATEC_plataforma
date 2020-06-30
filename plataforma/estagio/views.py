@@ -4,13 +4,24 @@ from django.urls import reverse as r
 from core.facade import area_student, area_teacher, area_company
 from estagio.forms import ConvenioForm
 from estagio.models import ConvenioModel
+from plataforma import settings
+
+
+@area_teacher
+def listar_todos_convenios(request):
+    context = {'media_url': settings.MEDIA_URL,
+               'convenios': ConvenioModel.objects.all()}
+    return render(request, 'validar_convenio.html', context)
 
 
 @area_teacher
 def validar_convenio(request):
-    context = {}
-    return render(request, 'validar_convenio.html', context)
-
+    if request.method == 'GET':
+        context = {'media_url': settings.MEDIA_URL,
+                'convenios': ConvenioModel.objects.all()}
+        return render(request, 'validar_convenio.html', context)
+    else:
+        pass
 
 @area_company
 def upload_convenio(request):
@@ -28,3 +39,11 @@ def upload_convenio(request):
         else:
             context = {'form': form}
             return render(request, 'upload_convenio.html', context)
+
+
+@area_company
+def convenio_por_empresa(request):
+    if request.method == 'GET':
+        context = {'media_url': settings.MEDIA_URL,
+                   'convenios': ConvenioModel.objects.all()}
+        return render(request, 'convenio_por_empresa.html', context)

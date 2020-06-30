@@ -8,6 +8,10 @@ class ConvenioModel(models.Model):
     observacao = models.TextField(default='', blank=True)
     observacao_professor = models.TextField(default='', blank=True)
     aprovado_professor = models.BooleanField(default=False)
+    changed_at = models.DateTimeField(
+        auto_now_add=False,
+        auto_now=True
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
