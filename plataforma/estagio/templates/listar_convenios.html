@@ -27,38 +27,47 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Aprovar Convênio de Estágio</h1>
+            <h1 class="h3 mb-0 text-gray-800">Lista de todos os Convênios de Estágio</h1>
           </div>
 
           <!-- Content Row -->
           <div class="row">
+
+            <!-- Um card por convênio -->
+            {% for convenio in convenios %}
             <div class="col-xl-6 col-md-12 mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">
-                        <a href="{{media_url}}{{ convenio.documento}}"  target="_blank">Acessar Documento</a>
-                      </div>
                       <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                        Parecer docente
+                        Empresa:</div>
+                       {{ convenio.empresa.username }}
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        Observação:</div>
+                      {{ convenio.observacao }}
+                      
+                      {% if convenio.observacao_professor is not '' %}
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        Observação Docente:</div>
+                      {{ convenio.observacao_professor }}
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        Data de atualização:</div>
+                      {% endif %}
+                      {{ convenio.changed_at }}
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        Data do envio:</div>
+                      {{ convenio.created_at }}
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <a href="{{media_url}}{{ convenio.documento}}" target="_blank">Acessar Documento</a>
                       </div>
-                      <form action={% url 'estagio:pos_validar_convenio' %} novalidate method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                         <input type='hidden' name='convenio_id' value = "{{convenio.pk }}"/>
-                        <textarea name="observacao_professor" cols="40" rows="5" class="form-control" id="observacao_professor">Analisado e aprovado</textarea>
-                        <input type="radio" id="aprovado" name="aprovado_reprovado" value="1" checked>
-  <label for="aprovado">Aprovado</label><br>
-                        <input type="radio" id="reprovado" name="aprovado_reprovado" value="0">
-  <label for="reprovado">Reprovado</label><br>
-                        <input type="submit" value="Emitir Parecer">
-                      </form>
                     </div>
                   </div>
 
                 </div>
               </div>
             </div>
+            {% endfor %}
 
 
           </div>
