@@ -73,7 +73,7 @@ class pos_validar_convenio_Post(TestCase, CreateTestUser):
 
 
 @override_settings(DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage')
-class pos_validar_convenio_Post(TestCase, CreateTestUser):
+class pos_validar_convenio_Post_2(TestCase, CreateTestUser):
     def setUp(self):
         data = self.create_user_teacher()
         self.resp = self.client.post(r('core:login'), data)

@@ -59,7 +59,6 @@ class convenio_por_empresa_Get(TestCase, CreateTestUser):
                 self.assertContains(self.resp, text, count)
 
 
-@override_settings(DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage')
 class convenio_por_empresa_NoDataGet(TestCase, CreateTestUser):
     def setUp(self):
         data = self.create_user_company()
@@ -84,3 +83,18 @@ class convenio_por_empresa_NoDataGet(TestCase, CreateTestUser):
         for text, count in tags:
             with self.subTest():
                 self.assertContains(self.resp, text, count)
+
+
+class convenio_por_empresa_Post(TestCase, CreateTestUser):
+    def setUp(self):
+        data = self.create_user_company()
+        self.resp = self.client.post(r('core:login'), data)
+        self.resp = self.client.post(r(view_in_test))
+        self.resp2 = self.client.post(r(view_in_test), follow=True)
+
+    def test_template(self):
+        self.assertTemplateUsed(self.resp2, 'empresa_index.html')
+
+    def test_200_or_302(self):
+        self.assertEqual(302, self.resp.status_code)
+        self.assertEqual(200, self.resp2.status_code)

@@ -10,7 +10,7 @@ from plataforma import settings
 @area_teacher
 def listar_todos_convenios(request):
     context = {'media_url': settings.MEDIA_URL,
-               'convenios': ConvenioModel.objects.all()}
+               'convenios': ConvenioModel.objects.all().order_by('-created_at')}
     return render(request, 'listar_convenios.html', context)
 
 
@@ -77,6 +77,10 @@ def upload_convenio(request):
 @area_company
 def convenio_por_empresa(request):
     if request.method == 'GET':
+        id_user = request.user.pk
+        convenios = ConvenioModel.objects.filter(empresa_id=id_user)
         context = {'media_url': settings.MEDIA_URL,
-                   'convenios': ConvenioModel.objects.all()}
+                   'convenios': convenios}
         return render(request, 'convenio_por_empresa.html', context)
+    else:
+        return HttpResponseRedirect(r('core:core_index_empresa'))

@@ -32,8 +32,7 @@
 
           <!-- Content Row -->
           <div class="row">
-
-            <!-- Earnings (Monthly) Card Example -->
+          
              {% for convenio in convenios %}
             <div class="col-xl-6 col-md-12 mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
@@ -45,7 +44,7 @@
                       </div>
                       {{ convenio.observacao }}
                       <div class="h5 mb-0 font-weight-bold text-gray-800">
-                        <a href="{{media_url}}{{ convenio.documento}}">Acessar Documento</a>
+                        <a href="{{media_url}}{{ convenio.documento}}" target="_blank">Acessar Documento</a>
                       </div>
                     </div>
                   </div>

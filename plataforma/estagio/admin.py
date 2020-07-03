@@ -3,8 +3,8 @@ from .models import ConvenioModel
 
 
 class ConvenioModelAdmin(admin.ModelAdmin):
-    list_display = ('empresa', 'documento', 'observacao_professor',
-                    'aprovado_professor', 'changed_at', 'created_at', )
+    list_display = ('empresa', 'aprovado_professor', 'observacao_professor',
+                    'changed_at', 'created_at', 'documento',)
     date_hierarchy = 'created_at'
     search_fields = ('empresa', 'observacao_professor',
                      'aprovado_professor', 'changed_at', 'created_at')
