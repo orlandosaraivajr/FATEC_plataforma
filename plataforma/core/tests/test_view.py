@@ -1,6 +1,7 @@
 from abc import ABCMeta
 from django.shortcuts import resolve_url as r
 from django.test import TestCase
+from core.models import User
 from core.functions import (register_new_student, register_new_teacher,
                             register_new_company)
 from django.contrib.auth import get_user_model
@@ -33,6 +34,17 @@ class CreateTestUser(metaclass=ABCMeta):
         username = 'professor@fatec.sp.gov.br'
         password = '321mudar'
         register_new_teacher(username, password)
+        data = {'username': username,
+                'password': password, }
+        return data
+
+    def create_user_trainee_coordinator(self):
+        username = 'orlando@fatec.sp.gov.br'
+        password = '321mudar'
+        register_new_teacher(username, password)
+        user = User.objects.all()[0]
+        user.is_trainee_coordinator = True
+        user.save()
         data = {'username': username,
                 'password': password, }
         return data

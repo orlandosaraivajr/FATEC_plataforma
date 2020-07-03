@@ -27,7 +27,7 @@ class pos_validar_convenio_NoAuthGet(TestCase):
 
 class pos_validar_convenio_Get(TestCase, CreateTestUser):
     def setUp(self):
-        data = self.create_user_teacher()
+        data = self.create_user_trainee_coordinator()
         self.resp = self.client.post(r('core:login'), data)
         self.resp = self.client.get(r(view_in_test), follow=True)
         self.resp2 = self.client.get(r(view_in_test))
@@ -43,7 +43,7 @@ class pos_validar_convenio_Get(TestCase, CreateTestUser):
 @override_settings(DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage')
 class pos_validar_convenio_Post(TestCase, CreateTestUser):
     def setUp(self):
-        data = self.create_user_teacher()
+        data = self.create_user_trainee_coordinator()
         self.resp = self.client.post(r('core:login'), data)
         self.convenio = ConvenioModel(
             empresa=User.objects.all()[0],
@@ -75,7 +75,7 @@ class pos_validar_convenio_Post(TestCase, CreateTestUser):
 @override_settings(DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage')
 class pos_validar_convenio_Post_2(TestCase, CreateTestUser):
     def setUp(self):
-        data = self.create_user_teacher()
+        data = self.create_user_trainee_coordinator()
         self.resp = self.client.post(r('core:login'), data)
         self.convenio = ConvenioModel(
             empresa=User.objects.all()[0],
@@ -100,3 +100,21 @@ class pos_validar_convenio_Post_2(TestCase, CreateTestUser):
     def test_saved_aprovado(self):
         alterado = ConvenioModel.objects.filter(pk=self.convenio.pk)[0]
         self.assertTrue(alterado.aprovado_professor)
+
+
+@override_settings(DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage')
+class pos_validar_convenio_professor_Post(TestCase, CreateTestUser):
+    def setUp(self):
+        data = self.create_user_teacher()
+        self.resp = self.client.post(r('core:login'), data)
+        self.convenio = ConvenioModel(
+            empresa=User.objects.all()[0],
+            observacao='nenhuma observação',
+            documento=SimpleUploadedFile('tiny.pdf', TINY_GIF)
+        )
+        self.convenio.save()
+        data = {'convenio_id': self.convenio.pk}
+        self.resp = self.client.post(r(view_in_test), data)
+
+    def test_200_or_302(self):
+        self.assertEqual(302, self.resp.status_code)

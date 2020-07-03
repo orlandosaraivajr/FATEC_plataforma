@@ -27,7 +27,7 @@ class validar_convenio_NoAuthGet(TestCase):
 
 class validar_convenio_Get(TestCase, CreateTestUser):
     def setUp(self):
-        data = self.create_user_teacher()
+        data = self.create_user_trainee_coordinator()
         self.resp = self.client.post(r('core:login'), data)
         self.resp = self.client.get(r(view_in_test))
         self.resp2 = self.client.get(r(view_in_test), follow=True)
@@ -43,7 +43,7 @@ class validar_convenio_Get(TestCase, CreateTestUser):
 @override_settings(DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage')
 class validar_convenio_Post(TestCase, CreateTestUser):
     def setUp(self):
-        data = self.create_user_teacher()
+        data = self.create_user_trainee_coordinator()
         self.resp = self.client.post(r('core:login'), data)
         self.convenio = ConvenioModel(
             empresa=User.objects.all()[0],
@@ -76,7 +76,7 @@ class validar_convenio_Post(TestCase, CreateTestUser):
 
 class validar_convenio_NoDataPost(TestCase, CreateTestUser):
     def setUp(self):
-        data = self.create_user_teacher()
+        data = self.create_user_trainee_coordinator()
         self.resp = self.client.post(r('core:login'), data)
         data = {}
         self.resp = self.client.post(r(view_in_test), data)

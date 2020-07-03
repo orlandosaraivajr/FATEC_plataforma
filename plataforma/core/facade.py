@@ -1,4 +1,4 @@
-from core.decorators import area_student, area_teacher, area_company
+from core.decorators import area_trainee_coordinador, area_teacher, area_company
 
 from core.models import User
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse as r
-from core.facade import area_student, area_teacher, area_company
+from core.facade import area_trainee_coordinador, area_teacher, area_company
 from estagio.forms import ConvenioForm
 from estagio.models import ConvenioModel
 from plataforma import settings
@@ -25,7 +25,7 @@ def pre_validar_convenio(request):
         return HttpResponseRedirect(r('core:core_index_professor'))
 
 
-@area_teacher
+@area_trainee_coordinador
 def validar_convenio(request):
     if request.method == 'GET':
         return HttpResponseRedirect(r('core:core_index_professor'))
@@ -40,7 +40,7 @@ def validar_convenio(request):
             return HttpResponseRedirect(r('core:core_index_professor'))
 
 
-@area_teacher
+@area_trainee_coordinador
 def pos_validar_convenio(request):
     if request.method == 'GET':
         return HttpResponseRedirect(r('core:core_index_professor'))

@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth import login as auth_login
 from django.utils.datastructures import MultiValueDictKeyError
-
+from core.models import User
 
 def auth_request(request):
     if request.method == "POST":
