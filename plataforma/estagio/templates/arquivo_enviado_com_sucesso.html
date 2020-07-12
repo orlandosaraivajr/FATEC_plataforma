@@ -1,0 +1,62 @@
+<{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+
+
+{% block content %}
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    {% include "empresa_sidebar.html" %}
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        {% include "empresa_topbar.html" %}
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Envio de documentos</h1>
+          </div>
+
+            <form action={% url 'core:core_index_empresa' %} novalidate method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Envio de documentos realizado com sucesso.</div>
+                <br>
+                <center>
+                <input type="submit" value="     OK     "/>
+            </form>
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+    {% include "rodape.html" %}
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+
+
+
+{% endblock %}

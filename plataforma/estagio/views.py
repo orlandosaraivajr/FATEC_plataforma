@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse as r
 from core.facade import area_trainee_coordinador, area_teacher, area_company
-from estagio.forms import ConvenioForm
-from estagio.models import ConvenioModel
+from estagio.forms import ConvenioForm, DocumentoEstagioForm
+from estagio.models import ConvenioModel, DocumentoEstagioModel
 from plataforma import settings
 
 
@@ -56,6 +56,52 @@ def pos_validar_convenio(request):
         return render(request, 'pos_validar_convenio.html')
 
 
+@area_teacher
+def pre_validar_documento_estagio(request):
+    if request.method == 'GET':
+        documentos = DocumentoEstagioModel.objects.filter(
+            observacao_professor='')
+        context = {'media_url': settings.MEDIA_URL,
+                   'documentos': documentos}
+        return render(request, 'pre_validar_documento_estagio.html', context)
+    else:
+        return HttpResponseRedirect(r('core:core_index_professor'))
+
+
+@area_trainee_coordinador
+def validar_documento_estagio(request):
+    if request.method == 'GET':
+        return HttpResponseRedirect(r('core:core_index_professor'))
+    else:
+        id = request.POST.get('documento_id', '')
+        if id is not '':
+            documento = DocumentoEstagioModel.objects.filter(pk=id)[0]
+            context = {'media_url': settings.MEDIA_URL,
+                       'documento': documento}
+            return render(request, 'validar_documento_estagio.html', context)
+        else:
+            return HttpResponseRedirect(r('core:core_index_professor'))
+
+
+@area_trainee_coordinador
+def pos_validar_documento_estagio(request):
+    if request.method == 'GET':
+        return HttpResponseRedirect(r('core:core_index_professor'))
+    else:
+        id = request.POST.get('documento_id', '')
+        if id is not '':
+            obs_padrao = 'Parecer Emitido pelo docente.'
+            observacao = request.POST.get('observacao_professor', obs_padrao)
+            aprovado = request.POST.get('aprovado_reprovado', '1')
+            documento = DocumentoEstagioModel.objects.filter(pk=id)[0]
+            documento.observacao_professor = observacao
+            documento.aprovado_professor = aprovado
+            documento.save()
+            return render(request, 'pos_validar_documento_estagio.html')
+        else:
+            return HttpResponseRedirect(r('core:core_index_professor'))
+
+
 @area_company
 def upload_convenio(request):
     if request.method == 'GET':
@@ -68,10 +114,28 @@ def upload_convenio(request):
             novo_nome = form.renomear_arquivo(form.files['documento'].name)
             form.files['documento'].name = novo_nome
             ConvenioModel.objects.create(**form.cleaned_data)
-            return HttpResponseRedirect(r('core:core_index_empresa'))
+            return render(request, 'arquivo_enviado_com_sucesso.html')
         else:
             context = {'form': form}
             return render(request, 'upload_convenio.html', context)
+
+
+@area_company
+def upload_documentos_estagio(request):
+    if request.method == 'GET':
+        context = {'form': DocumentoEstagioForm(
+            initial={"empresa": request.user.pk})}
+        return render(request, 'upload_documentos_estagio.html', context)
+    else:
+        form = DocumentoEstagioForm(request.POST, request.FILES)
+        if form.is_valid():
+            novo_nome = form.renomear_arquivo(form.files['documento'].name)
+            form.files['documento'].name = novo_nome
+            DocumentoEstagioModel.objects.create(**form.cleaned_data)
+            return render(request, 'arquivo_enviado_com_sucesso.html')
+        else:
+            context = {'form': form}
+            return render(request, 'upload_documentos_estagio.html', context)
 
 
 @area_company
@@ -82,5 +146,18 @@ def convenio_por_empresa(request):
         context = {'media_url': settings.MEDIA_URL,
                    'convenios': convenios}
         return render(request, 'convenio_por_empresa.html', context)
+    else:
+        return HttpResponseRedirect(r('core:core_index_empresa'))
+
+
+@area_company
+def estagiarios_por_empresa(request):
+    if request.method == 'GET':
+        id_user = request.user.pk
+        convenios = DocumentoEstagioModel.objects.filter(
+            empresa_id=id_user).order_by('-created_at')
+        context = {'media_url': settings.MEDIA_URL,
+                   'convenios': convenios}
+        return render(request, 'estagiarios_por_empresa.html', context)
     else:
         return HttpResponseRedirect(r('core:core_index_empresa'))

@@ -73,14 +73,13 @@ class uploadConvenioEstagioPostOk(TestCase, CreateTestUser):
         self.resp = self.client.post(r(view_in_test), self.data)
 
     def test_post(self):
-        self.assertEqual(302, self.resp.status_code)
+        self.assertEqual(200, self.resp.status_code)
 
     def test_saved_data(self):
         self.assertTrue(ConvenioModel.objects.exists())
 
-    def test_redirect_site(self):
-        url = self.resp.url
-        self.assertEqual('/index_empresa', url)
+    def test_template(self):
+        self.assertTemplateUsed(self.resp, "arquivo_enviado_com_sucesso.html")
 
 
 @override_settings(DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage')

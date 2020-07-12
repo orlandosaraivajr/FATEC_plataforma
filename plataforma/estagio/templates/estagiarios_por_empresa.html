@@ -1,0 +1,97 @@
+<{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+
+
+{% block content %}
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    {% include "empresa_sidebar.html" %}
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        {% include "empresa_topbar.html" %}
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Documentos dos Estágios</h1>
+          </div>
+
+          <!-- Content Row -->
+          <div class="row">
+          
+             {% for convenio in convenios %}
+            <div class="col-xl-6 col-md-12 mb-4">
+              {% if convenio.observacao_professor  %}
+                <div class="card border-left-success shadow h-100 py-2">
+              {% else %}
+                <div class="card border-left-warning shadow h-100 py-2">
+              {% endif %}
+                <div class="card-body">
+                  <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        Data do envio: {{ convenio.created_at }}
+                      </div>
+                      {{ convenio.observacao }} <br>
+                      {{ convenio.tipo_de_documento }}<br>
+                      {{ convenio.nome_aluno }} <br>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <a href="{{media_url}}{{ convenio.documento}}" target="_blank">Acessar Documento</a>
+                      </div>
+                      {% if convenio.observacao_professor  %}
+                        <br>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        Parecer docente:
+                        </div>
+                        {{ convenio.observacao_professor }} <br>
+                      {% endif %}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+    {% include "rodape.html" %}
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+
+
+
+{% endblock %}
+
+>

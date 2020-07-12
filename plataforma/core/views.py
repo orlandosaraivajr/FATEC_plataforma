@@ -22,7 +22,7 @@ def logout(request):
 
 @login_required
 def home(request):
-    context = {'user': request.user.email}
+    context = {'user': request.user}
     return render(request, 'index.html', context)
 
 
@@ -37,6 +37,10 @@ def index_professor(request):
     context = {}
     return render(request, 'professor_index.html', context)
 
+@area_teacher
+def perfil_professor(request):
+    context = {}
+    return render(request, 'professor_mudar_perfil.html', context)
 
 @area_company
 def index_empresa(request):

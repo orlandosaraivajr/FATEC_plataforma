@@ -9,6 +9,11 @@ class User(AbstractUser):
         verbose_name='Coodenador de Estágio', default=False)
     is_company = models.BooleanField(verbose_name='Empresa', default=False)
 
+    def __str__(self):
+        if self.first_name == '':
+            return self.email
+        return self.first_name
+    
     class Meta:
         verbose_name_plural = 'Usuários'
         verbose_name = 'Usuário'
