@@ -1,0 +1,106 @@
+<{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+
+
+{% block content %}
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    {% include "empresa_sidebar.html" %}
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        {% include "empresa_topbar.html" %}
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Equipe Fatec Araras</h1>
+          </div>
+
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                    Direção da Unidade
+                </div>
+                <div class="col-xl-6 col-md-12 mb-4">
+                    Marco Anselmo de Godoi Prezoto<br>
+                    <b>f290dir@cps.sp.gov.br</b>
+                </div>
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                    Área Acadêmica
+                </div>
+                <div class="col-xl-6 col-md-12 mb-4">
+                    Rosana Fatima de Melo<br>
+                    <b>f290acad@cps.sp.gov.br</b>
+                </div>                
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                   Área Administrativa
+                </div>
+                <div class="col-xl-6 col-md-12 mb-4">
+                    Ana Paula Luzetti<br>
+                    <b>f290adm@cps.sp.gov.br</b>
+                </div>  
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                   Coordenação Sistemas para Internet
+                </div>
+                <div class="col-xl-6 col-md-12 mb-4">
+                    Nilton Cesar Sacco<br>
+                    <b>nilton.sacco@fatec.sp.gov.br</b>
+                </div> 
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                   Coordenação Gestão Empresarial
+                </div>
+                <div class="col-xl-6 col-md-12 mb-4">
+                    Zenaide Moschim Gianini<br>
+                    <b>zenaide.gianini@fatec.sp.gov.br</b>
+                </div> 
+
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                   Núcleo de Apoio Acadêmico (NAC)
+                </div>
+                <div class="col-xl-6 col-md-12 mb-4">
+                    Dhebora Umbelino<br>
+                    <b>dhebora.silva@fatec.sp.gov.br</b><br>
+                    Orlando Saraiva do Nascimento Júnior <br>
+                    <b>orlando.nascimento@fatec.sp.gov.br</b><br>
+                    Paulo Eduardo Ferreira<br>
+                    <b>paulo.ferreira51@fatec.sp.gov.br</b><br>
+                    Thiago Mendes <br>
+                    <b>thiago.mendes6@fatec.sp.gov.br</b><br>
+                </div> 
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+    {% include "rodape.html" %}
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+
+
+
+{% endblock %}
+
+>

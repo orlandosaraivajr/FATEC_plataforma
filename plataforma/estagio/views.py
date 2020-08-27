@@ -31,7 +31,7 @@ def validar_convenio(request):
         return HttpResponseRedirect(r('core:core_index_professor'))
     else:
         id = request.POST.get('convenio_id', '')
-        if id is not '':
+        if id != '':
             convenio = ConvenioModel.objects.filter(pk=id)[0]
             context = {'media_url': settings.MEDIA_URL,
                        'convenio': convenio}
@@ -74,7 +74,7 @@ def validar_documento_estagio(request):
         return HttpResponseRedirect(r('core:core_index_professor'))
     else:
         id = request.POST.get('documento_id', '')
-        if id is not '':
+        if id != '':
             documento = DocumentoEstagioModel.objects.filter(pk=id)[0]
             context = {'media_url': settings.MEDIA_URL,
                        'documento': documento}
@@ -89,7 +89,7 @@ def pos_validar_documento_estagio(request):
         return HttpResponseRedirect(r('core:core_index_professor'))
     else:
         id = request.POST.get('documento_id', '')
-        if id is not '':
+        if id != '':
             obs_padrao = 'Parecer Emitido pelo docente.'
             observacao = request.POST.get('observacao_professor', obs_padrao)
             aprovado = request.POST.get('aprovado_reprovado', '1')

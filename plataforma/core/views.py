@@ -37,12 +37,19 @@ def index_professor(request):
     context = {}
     return render(request, 'professor_index.html', context)
 
+
 @area_teacher
 def perfil_professor(request):
     context = {}
     return render(request, 'professor_mudar_perfil.html', context)
 
+
 @area_company
 def index_empresa(request):
     context = {}
     return render(request, 'empresa_index.html', context)
+
+
+def equipe_fatec(request):
+    context = {}
+    return render(request, 'equipe_fatec.html', context)

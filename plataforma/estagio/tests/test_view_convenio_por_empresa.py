@@ -49,8 +49,8 @@ class convenio_por_empresa_Get(TestCase, CreateTestUser):
         tags = (
             ('Módulo Empresa', 1),
             ('Módulo Professor', 0),
-            ('<div', 39),
-            ('</div>', 39),
+            ('<div', 36),
+            ('</div>', 36),
             ('/media/', 1),
             ('<input', 1),
         )
@@ -75,8 +75,8 @@ class convenio_por_empresa_NoDataGet(TestCase, CreateTestUser):
         tags = (
             ('Módulo Empresa', 1),
             ('Módulo Professor', 0),
-            ('<div', 32),
-            ('</div>', 32),
+            ('<div', 29),
+            ('</div>', 29),
             ('/media/', 0),
             ('<input', 1),
         )
