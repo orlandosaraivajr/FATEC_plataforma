@@ -17,7 +17,7 @@ class ConvenioFormTest(TestCase):
 
     def test_form_has_fields(self):
         expected = ['empresa', 'documento']
-        expected += ['observacao']
+        expected += ['validade', 'observacao']
         self.assertSequenceEqual(expected, list(self.form.fields))
 
     def test_renomear_arquivo(self):
@@ -37,7 +37,8 @@ class DataConvenioFormTest(TestCase, CreateTestUser):
         empresa = User.objects.all()[0]
         data = {
             'empresa': empresa.pk,
-            'observacao': 'tesTe'
+            'observacao': 'tesTe',
+            'validade': '1'
         }
         file_data = {
             'documento': SimpleUploadedFile('file.gif', TINY_GIF)
@@ -54,6 +55,9 @@ class DataConvenioFormTest(TestCase, CreateTestUser):
 
     def test_observacao_upper(self):
         self.assertEqual('TESTE', self.form.cleaned_data['observacao'])
+
+    def test_validade(self):
+        self.assertEqual('1', self.form.cleaned_data['validade'])
 
 
 class DocumentoEstagioTest(TestCase):

@@ -9,8 +9,9 @@ from plataforma import settings
 
 @area_teacher
 def listar_todos_convenios(request):
+    convenios = ConvenioModel.objects.all().order_by('-created_at')
     context = {'media_url': settings.MEDIA_URL,
-               'convenios': ConvenioModel.objects.all().order_by('-created_at')}
+               'convenios': convenios}
     return render(request, 'listar_convenios.html', context)
 
 

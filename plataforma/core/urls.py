@@ -14,8 +14,7 @@ urlpatterns_aluno = [
 ]
 
 urlpatterns_professor = [
-    path('index_professor', views.index_professor,
-    name='core_index_professor'),
+    path('index_professor', views.index_professor, name='core_index_professor'),
     path('perfil_professor', views.perfil_professor, name='perfil_professor'),
 ]
 urlpatterns_empresa = [

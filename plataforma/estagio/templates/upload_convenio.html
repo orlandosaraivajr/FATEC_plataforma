@@ -41,12 +41,15 @@
                     <div class="col mr-2">
                       <form action={% url 'estagio:upload_convenio' %} novalidate method="POST" enctype="multipart/form-data">
                           {% csrf_token %}
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Selecione o arquivo</div>
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{form.documento.label }}</div>
                           <div class="h5 mb-0 font-weight-bold text-gray-800">
                           {{form.empresa }}
                           {{form.documento }}
                           <br><br>
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Observação</div>
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{form.validade.label }}</div>
+                          {{form.validade }}
+                          <br><br>
+                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{form.observacao.label }}</div>
                           {{form.observacao }}
                           <br>
                           

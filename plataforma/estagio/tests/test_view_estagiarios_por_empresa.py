@@ -1,10 +1,9 @@
-from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
 from django.shortcuts import resolve_url as r
-from core.facade import User
+from core.models import User
 from core.facade import CreateTestUser
-from estagio.models import ConvenioModel, DocumentoEstagioModel
+from estagio.models import DocumentoEstagioModel
 from plataforma import settings
 
 TINY_GIF = settings.TINY_GIF

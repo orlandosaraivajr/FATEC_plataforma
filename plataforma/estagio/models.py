@@ -1,3 +1,5 @@
+from django.utils import timezone
+from datetime import timedelta
 from django.db import models
 from core.facade import User
 
@@ -17,6 +19,15 @@ CURSO_FATEC = (
     ('1', 'Gestão Empresarial'),
 )
 
+VALIDADE_CONVENIO = (
+    ('1', '06 meses'),
+    ('2', '1 ano'),
+    ('3', '2 anos'),
+    ('4', '3 anos'),
+    ('5', '4 anos'),
+    ('6', '5 anos'),
+)
+
 
 class ConvenioModel(models.Model):
     empresa = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -24,11 +35,39 @@ class ConvenioModel(models.Model):
     observacao = models.TextField(default='', blank=True)
     observacao_professor = models.TextField(default='', blank=True)
     aprovado_professor = models.BooleanField(default=False)
+    validade = models.CharField(
+        verbose_name='Validade Convênio',
+        max_length=2,
+        choices=VALIDADE_CONVENIO,
+        default='6'
+    )
+    data_validade = models.DateTimeField(
+        default=timezone.now() + timedelta(days=1826))
     changed_at = models.DateTimeField(
         auto_now_add=False,
         auto_now=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def ajuste_data_validade(self):
+        if getattr(self, 'validade', True):
+            if self.validade == '1':
+                self.data_validade = timezone.now() + timedelta(days=180)
+            if self.validade == '2':
+                self.data_validade = timezone.now() + timedelta(days=365)
+            if self.validade == '3':
+                self.data_validade = timezone.now() + timedelta(days=731)
+            if self.validade == '4':
+                self.data_validade = timezone.now() + timedelta(days=1096)
+            if self.validade == '5':
+                self.data_validade = timezone.now() + timedelta(days=1461)
+            if self.validade == '6':
+                self.data_validade = timezone.now() + timedelta(days=1826)
+
+    def save(self, *args, **kwargs):
+        if getattr(self, 'validade', True):
+            self.ajuste_data_validade()
+        super(ConvenioModel, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = 'Convênios de Estágio'

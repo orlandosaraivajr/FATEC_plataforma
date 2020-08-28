@@ -1,8 +1,7 @@
-from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
 from django.shortcuts import resolve_url as r
-from core.facade import User
+from core.models import User
 from core.facade import CreateTestUser
 from estagio.models import DocumentoEstagioModel
 from plataforma import settings
@@ -66,9 +65,10 @@ class pos_validar_documento_Post(TestCase, CreateTestUser):
         self.assertEqual(200, self.resp.status_code)
 
     def test_saved_observacao_professor(self):
-        alterado = DocumentoEstagioModel.objects.filter(pk=self.documento.pk)[0]
+        valor = DocumentoEstagioModel.objects.filter(
+            pk=self.documento.pk)[0]
         self.assertEqual(
-            alterado.observacao_professor, 'Parecer Favorável')
+            valor.observacao_professor, 'Parecer Favorável')
 
     def test_saved_aprovado(self):
         alterado = DocumentoEstagioModel.objects.filter(
@@ -100,13 +100,13 @@ class pos_validar_documento_Post_2(TestCase, CreateTestUser):
         self.assertEqual(200, self.resp.status_code)
 
     def test_saved_observacao_professor(self):
-        alterado = DocumentoEstagioModel.objects.filter(pk=self.documento.pk)[0]
+        valor = DocumentoEstagioModel.objects.filter(pk=self.documento.pk)[0]
         self.assertEqual(
-            alterado.observacao_professor, 'Parecer Emitido pelo docente.')
+            valor.observacao_professor, 'Parecer Emitido pelo docente.')
 
     def test_saved_aprovado(self):
-        alterado = DocumentoEstagioModel.objects.filter(pk=self.documento.pk)[0]
-        self.assertTrue(alterado.aprovado_professor)
+        valor = DocumentoEstagioModel.objects.filter(pk=self.documento.pk)[0]
+        self.assertTrue(valor.aprovado_professor)
 
 
 @override_settings(DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage')

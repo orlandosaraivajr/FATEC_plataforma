@@ -1,8 +1,7 @@
-from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
 from django.shortcuts import resolve_url as r
-from core.facade import User
+from core.models import User
 from core.facade import CreateTestUser
 from estagio.models import ConvenioModel
 from estagio.forms import ConvenioForm
@@ -69,6 +68,7 @@ class uploadConvenioEstagioPostOk(TestCase, CreateTestUser):
         self.data = {}
         self.data['empresa'] = User.objects.all()[0].pk
         self.data['observacao'] = "agendado próxima visita"
+        self.data['validade'] = "1"
         self.data['documento'] = self.imagem_mock
         self.resp = self.client.post(r(view_in_test), self.data)
 

@@ -13,7 +13,7 @@ class User(AbstractUser):
         if self.first_name == '':
             return self.email
         return self.first_name
-    
+
     class Meta:
         verbose_name_plural = 'Usuários'
         verbose_name = 'Usuário'

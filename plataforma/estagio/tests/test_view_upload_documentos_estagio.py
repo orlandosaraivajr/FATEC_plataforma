@@ -1,8 +1,7 @@
-from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase, override_settings
 from django.shortcuts import resolve_url as r
-from core.facade import User
+from core.models import User
 from core.facade import CreateTestUser
 from estagio.models import DocumentoEstagioModel
 from estagio.forms import DocumentoEstagioForm
@@ -83,6 +82,7 @@ class uploadDocumentosEstagioPostOk(TestCase, CreateTestUser):
 
     def test_template(self):
         self.assertTemplateUsed(self.resp, "arquivo_enviado_com_sucesso.html")
+
 
 @override_settings(DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage')
 class uploadDocumentosEstagioPostNoFile(TestCase, CreateTestUser):

@@ -8,13 +8,15 @@ from estagio.models import ConvenioModel, DocumentoEstagioModel
 class ConvenioForm(ModelForm):
     class Meta:
         model = ConvenioModel
-        fields = ('empresa', 'documento', 'observacao')
+        fields = ('empresa', 'documento', 'validade', 'observacao')
         labels = {
-            'documento': 'Arquivo',
-            'observacao': 'Observação',
+            'documento': 'Selecione o arquivo:',
+            'validade': 'Convênio válido por:',
+            'observacao': 'Observação:',
         }
         widgets = {
             'empresa': forms.HiddenInput(),
+            'validade': forms.Select(attrs={'class': 'form-control'}),
             'observacao': forms.Textarea(attrs={'class': 'form-control'}),
         }
         error_messages = {
@@ -33,6 +35,9 @@ class ConvenioForm(ModelForm):
         nome = nome + sufixo
         return nome
 
+    def clean_validade(self):
+        return self.cleaned_data['validade']
+
     def clean_observacao(self):
         return self.cleaned_data['observacao'].upper()
 
@@ -44,7 +49,7 @@ class DocumentoEstagioForm(ModelForm):
                   'documento', 'observacao')
         labels = {
             'documento': 'Arquivo',
-            'tipo_documento':'Tipo de Documento',
+            'tipo_documento': 'Tipo de Documento',
             'curso_fatec': 'Curso',
             'nome_aluno': 'Nome do Aluno',
             'observacao': 'Observação',
@@ -74,4 +79,3 @@ class DocumentoEstagioForm(ModelForm):
 
     def clean_nome_aluno(self):
         return self.cleaned_data['nome_aluno'].upper()
-
