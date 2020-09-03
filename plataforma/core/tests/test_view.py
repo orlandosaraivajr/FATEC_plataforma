@@ -3,7 +3,7 @@ from django.shortcuts import resolve_url as r
 from django.test import TestCase
 from core.models import User
 from core.functions import (register_new_student, register_new_teacher,
-                            register_new_company)
+                            register_new_company, register_new_admin)
 from django.contrib.auth import get_user_model
 
 
@@ -53,6 +53,14 @@ class CreateTestUser(metaclass=ABCMeta):
         username = 'empresa@gmail.com'
         password = '123mudar'
         register_new_company(username, password)
+        data = {'username': username,
+                'password': password, }
+        return data
+
+    def create_user_admin(self):
+        username = 'admin@admin.com'
+        password = '123mudar'
+        register_new_admin(username, password)
         data = {'username': username,
                 'password': password, }
         return data

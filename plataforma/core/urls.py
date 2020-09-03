@@ -20,6 +20,10 @@ urlpatterns_professor = [
 urlpatterns_empresa = [
     path('index_empresa', views.index_empresa, name='core_index_empresa'),
 ]
+urlpatterns_manutencao = [
+    path('index_manutencao', views.index_manutencao, name='core_index_manutencao'),
+]
 urlpatterns += urlpatterns_aluno
 urlpatterns += urlpatterns_empresa
 urlpatterns += urlpatterns_professor
+urlpatterns += urlpatterns_manutencao

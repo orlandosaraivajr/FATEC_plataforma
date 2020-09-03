@@ -61,3 +61,14 @@ def register_new_company(email=None, password=None):
         return True
     else:
         return False
+
+
+def register_new_admin(email=None, password=None):
+    if email and password:
+        User = get_user_model()
+        novo_admin = User.objects.create_user(
+            email, email, password, is_superuser=True)
+        novo_admin.save()
+        return True
+    else:
+        return False

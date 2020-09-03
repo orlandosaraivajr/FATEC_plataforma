@@ -47,3 +47,6 @@ class UserModelTest(TestCase):
 
     def test_empresa(self):
         self.assertFalse(self.cadastro.is_company)
+
+    def test_coordenador_estagio(self):
+        self.assertFalse(self.cadastro.is_trainee_coordinator)

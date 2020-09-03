@@ -1,6 +1,7 @@
 from django.contrib.auth import logout as auth_logout
 from django.shortcuts import redirect, render
-from core.decorators import area_student, area_teacher, area_company
+from core.decorators import (area_student, area_teacher,
+                             area_company, area_admin)
 from core.functions import auth_request
 from django.contrib.auth.decorators import login_required
 
@@ -48,6 +49,12 @@ def perfil_professor(request):
 def index_empresa(request):
     context = {}
     return render(request, 'empresa_index.html', context)
+
+
+@area_admin
+def index_manutencao(request):
+    context = {}
+    return render(request, 'manutencao_index.html', context)
 
 
 def equipe_fatec(request):

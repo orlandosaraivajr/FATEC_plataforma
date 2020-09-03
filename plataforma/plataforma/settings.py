@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     # LOCAL APPs
     'core.apps.CoreConfig',
     'estagio.apps.EstagioConfig',
+    'manutencao.apps.ManutencaoConfig',
 ]
 
 AUTH_USER_MODEL = 'core.User'
