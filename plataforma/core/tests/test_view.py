@@ -155,6 +155,25 @@ class coreGetIndexAlunoFail(TestCase):
         self.assertEqual(200, self.resp2.status_code)
 
 
+class coreGetIndexAlunoFail_access_denied(TestCase, CreateTestUser):
+    def setUp(self):
+        data = self.create_user_teacher()
+        self.client.post(r(self.login_url), data)
+        self.resp = self.client.get(r('core:core_index_aluno'))
+        self.resp2 = self.client.get(r('core:core_index_aluno'), follow=True)
+
+    def test_template_used(self):
+        self.assertTemplateUsed(self.resp2, 'base.html')
+        self.assertTemplateUsed(self.resp2, 'rodape.html')
+        self.assertTemplateUsed(self.resp2, 'index.html')
+
+    def test_302_response_1(self):
+        self.assertEqual(302, self.resp.status_code)
+
+    def test_200_response_2(self):
+        self.assertEqual(200, self.resp2.status_code)
+
+
 class coreGetIndexAlunoOk(TestCase, CreateTestUser):
     def setUp(self):
         data = self.create_user_student()
@@ -190,6 +209,25 @@ class coreGetIndexProfessorFail(TestCase):
         self.assertEqual(302, self.resp.status_code)
 
     def test_200_response(self):
+        self.assertEqual(200, self.resp2.status_code)
+
+
+class coreGetIndexProfessorFail_access_denied(TestCase, CreateTestUser):
+    def setUp(self):
+        data = self.create_user_student()
+        self.client.post(r(self.login_url), data)
+        self.resp = self.client.get(r('core:core_index_professor'))
+        self.resp2 = self.client.get(r('core:core_index_professor'), follow=True)
+
+    def test_template_used(self):
+        self.assertTemplateUsed(self.resp2, 'base.html')
+        self.assertTemplateUsed(self.resp2, 'rodape.html')
+        self.assertTemplateUsed(self.resp2, 'index.html')
+
+    def test_302_response_1(self):
+        self.assertEqual(302, self.resp.status_code)
+
+    def test_200_response_2(self):
         self.assertEqual(200, self.resp2.status_code)
 
 
@@ -232,6 +270,25 @@ class coreGetIndexEmpresaFail(TestCase):
         self.assertEqual(200, self.resp2.status_code)
 
 
+class coreGetIndexEmpresaFail_access_denied(TestCase, CreateTestUser):
+    def setUp(self):
+        data = self.create_user_student()
+        self.client.post(r(self.login_url), data)
+        self.resp = self.client.get(r('core:core_index_empresa'))
+        self.resp2 = self.client.get(r('core:core_index_empresa'), follow=True)
+
+    def test_template_used(self):
+        self.assertTemplateUsed(self.resp2, 'base.html')
+        self.assertTemplateUsed(self.resp2, 'rodape.html')
+        self.assertTemplateUsed(self.resp2, 'index.html')
+
+    def test_302_response_1(self):
+        self.assertEqual(302, self.resp.status_code)
+
+    def test_200_response_2(self):
+        self.assertEqual(200, self.resp2.status_code)
+
+
 class coreGetIndexEmpresaOk(TestCase, CreateTestUser):
     def setUp(self):
         data = self.create_user_company()
@@ -252,3 +309,31 @@ class coreGetIndexEmpresaOk(TestCase, CreateTestUser):
 
     def test_200_response_2(self):
         self.assertEqual(200, self.resp2.status_code)
+
+
+class coreLogout(TestCase, CreateTestUser):
+    def setUp(self):
+        data = self.create_user_student()
+        self.resp = self.client.post(r('core:login'), data)
+        self.resp = self.client.post(r('core:logout'), data)
+
+    def test_200_response(self):
+        self.assertEqual(200, self.resp.status_code)
+
+    def test_template_used(self):
+        self.assertTemplateUsed(self.resp, 'login.html')
+        self.assertTemplateUsed(self.resp, 'base.html')
+
+
+class corePerfilProfessor(TestCase, CreateTestUser):
+    def setUp(self):
+        data = self.create_user_teacher()
+        self.resp = self.client.post(r('core:login'), data)
+        self.resp = self.client.post(r('core:perfil_professor'), data)
+
+    def test_200_response(self):
+        self.assertEqual(200, self.resp.status_code)
+
+    def test_template_used(self):
+        self.assertTemplateUsed(self.resp, 'professor_mudar_perfil.html')
+        self.assertTemplateUsed(self.resp, 'rodape.html')

@@ -19,6 +19,9 @@ class UserModelTest(TestCase):
     def test_created(self):
         self.assertTrue(User.objects.exists())
 
+    def test_str_model(self):
+        self.assertEqual(str(self.cadastro), 'Orlando')
+
     def test_username(self):
         username = self.cadastro.username
         self.assertEqual(username, 'orlandosaraivajr')
@@ -50,3 +53,21 @@ class UserModelTest(TestCase):
 
     def test_coordenador_estagio(self):
         self.assertFalse(self.cadastro.is_trainee_coordinator)
+
+
+class UserModel_no_name_Test(TestCase):
+    def setUp(self):
+        User = get_user_model()
+        self.cadastro = User(
+            username='orlandosaraivajr',
+            email='orlandosaraivajr@gmail.com',
+            password='123mudar',
+            last_name='Saraiva Jr',
+        )
+        self.cadastro.save()
+
+    def test_created(self):
+        self.assertTrue(User.objects.exists())
+
+    def test_str_model(self):
+        self.assertEqual(str(self.cadastro), 'orlandosaraivajr@gmail.com')

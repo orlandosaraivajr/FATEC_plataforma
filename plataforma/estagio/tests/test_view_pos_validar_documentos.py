@@ -128,3 +128,19 @@ class pos_validar_documento_professor_Post(TestCase, CreateTestUser):
 
     def test_200_or_302(self):
         self.assertEqual(302, self.resp.status_code)
+
+
+class pos_validar_documento_Post_Fail_id_null(TestCase, CreateTestUser):
+    def setUp(self):
+        data = self.create_user_trainee_coordinator()
+        self.resp = self.client.post(r('core:login'), data)
+        self.resp = self.client.get(r(view_in_test), follow=True)
+        self.resp2 = self.client.post(r(view_in_test))
+
+    def test_template(self):
+        self.assertTemplateUsed(self.resp, 'professor_index.html')
+        self.assertTemplateUsed(self.resp, 'rodape.html')
+
+    def test_200_or_302(self):
+        self.assertEqual(200, self.resp.status_code)
+        self.assertEqual(302, self.resp2.status_code)
