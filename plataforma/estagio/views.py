@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse as r
 from core.facade import area_trainee_coordinador, area_teacher, area_company
 from estagio.forms import ConvenioForm, DocumentoEstagioForm
+from estagio.forms import ProfessorConvenioForm
 from estagio.models import ConvenioModel, DocumentoEstagioModel
 from plataforma import settings
 
@@ -67,6 +68,23 @@ def pre_validar_documento_estagio(request):
         return render(request, 'pre_validar_documento_estagio.html', context)
     else:
         return HttpResponseRedirect(r('core:core_index_professor'))
+
+
+@area_trainee_coordinador
+def professor_upload_convenio(request):
+    if request.method == 'GET':
+        context = {'form': ProfessorConvenioForm()}
+        return render(request, 'professor_upload_convenio.html', context)
+    else:
+        form = ProfessorConvenioForm(request.POST, request.FILES)
+        if form.is_valid():
+            novo_nome = form.renomear_arquivo(form.files['documento'].name)
+            form.files['documento'].name = novo_nome
+            ConvenioModel.objects.create(**form.cleaned_data)
+            return render(request, 'arquivo_enviado_com_sucesso.html')
+        else:
+            context = {'form': form}
+            return render(request, 'professor_upload_convenio.html', context)
 
 
 @area_trainee_coordinador

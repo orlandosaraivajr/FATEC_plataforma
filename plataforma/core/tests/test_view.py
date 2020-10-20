@@ -217,7 +217,8 @@ class coreGetIndexProfessorFail_access_denied(TestCase, CreateTestUser):
         data = self.create_user_student()
         self.client.post(r(self.login_url), data)
         self.resp = self.client.get(r('core:core_index_professor'))
-        self.resp2 = self.client.get(r('core:core_index_professor'), follow=True)
+        self.resp2 = self.client.get(r('core:core_index_professor'),
+                                     follow=True)
 
     def test_template_used(self):
         self.assertTemplateUsed(self.resp2, 'base.html')

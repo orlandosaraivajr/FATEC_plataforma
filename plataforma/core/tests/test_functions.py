@@ -3,7 +3,7 @@ from django.test import TestCase
 
 from core.functions import (register_new_teacher, register_new_company,
                             register_new_student, register_new_admin,
-                            authenticate, auth_request)
+                            authenticate)
 from core.models import User
 
 
@@ -25,9 +25,9 @@ class register_fails(TestCase):
 class register_OK(TestCase):
     def setUp(self):
         self.password = '123mudar'
-        self.student = register_new_student('student@fatec.sp.gov.br', self.password)
-        self.teacher = register_new_teacher('teacher@fatec.sp.gov.br', self.password)
-        self.company = register_new_company('company@fatec.sp.gov.br', self.password)
+        self.student = register_new_student('student@teste.br', self.password)
+        self.teacher = register_new_teacher('teacher@teste.br', self.password)
+        self.company = register_new_company('company@teste.br', self.password)
         self.admin = register_new_admin('admin@fatec.sp.gov.br', self.password)
 
     def test_ok_create_users(self):

@@ -3,6 +3,50 @@ import random
 from django import forms
 from django.forms import ModelForm
 from estagio.models import ConvenioModel, DocumentoEstagioModel
+from core.models import User
+
+
+class ProfessorConvenioForm(ModelForm):
+    empresa = forms.ModelChoiceField(
+        queryset=User.objects.filter(is_company=True),
+        widget=forms.Select(attrs={'class': 'form-control'}),
+    )
+
+    class Meta:
+        model = ConvenioModel
+        fields = ('empresa', 'documento', 'validade', 'observacao')
+        labels = {
+            'empresa': 'Selecione a empresa:',
+            'documento': 'Selecione o arquivo:',
+            'validade': 'Convênio válido por:',
+            'observacao': 'Observação:',
+        }
+
+        widgets = {
+            'validade': forms.Select(attrs={'class': 'form-control'}),
+            'observacao': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+        error_messages = {
+            'empresa': {
+                'required': ("Selecione a empresa."),
+            },
+            'documento': {
+                'required': ("Informe um arquivo."),
+            }
+        }
+
+    def renomear_arquivo(self, nome):
+        sufixo = nome[-5:]
+        nome = hashlib.sha256(
+            str(random.getrandbits(256)).encode('utf-8')).hexdigest()
+        nome = 'professor_' + nome + sufixo
+        return nome
+
+    def clean_validade(self):
+        return self.cleaned_data['validade']
+
+    def clean_observacao(self):
+        return self.cleaned_data['observacao'].upper()
 
 
 class ConvenioForm(ModelForm):

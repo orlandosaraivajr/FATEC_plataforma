@@ -1,10 +1,6 @@
-
-from django.core.files.uploadedfile import SimpleUploadedFile
-from django.test import TestCase, override_settings
+from django.test import TestCase
 from django.shortcuts import resolve_url as r
-from core.models import User
 from core.facade import CreateTestUser
-from estagio.models import ConvenioModel
 from plataforma import settings
 
 TINY_GIF = settings.TINY_GIF
@@ -38,6 +34,7 @@ class listar_todos_convenios_Get(TestCase, CreateTestUser):
     def test_200_or_302(self):
         self.assertEqual(200, self.resp.status_code)
         self.assertEqual(200, self.resp2.status_code)
+
 
 class listar_todos_convenios_Fail_access_denied(TestCase, CreateTestUser):
     def setUp(self):

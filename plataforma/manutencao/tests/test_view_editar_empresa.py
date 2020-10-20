@@ -1,8 +1,6 @@
 from django.test import TestCase
 from django.shortcuts import resolve_url as r
-from core.models import User
 from core.facade import CreateTestUser
-from manutencao.forms import UserForm
 
 
 view_in_test = 'manutencao:editar_empresa'
