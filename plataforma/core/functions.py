@@ -72,3 +72,16 @@ def register_new_admin(email=None, password=None):
         return True
     else:
         return False
+
+
+def update_user(id=None, password=None, first_name='', last_name=''):
+    if id and password:
+        User = get_user_model()
+        usuario = User.objects.get(id=id)
+        usuario.set_password(password)
+        usuario.first_name = first_name
+        usuario.last_name = last_name
+        usuario.save()
+        return True
+    else:
+        return False

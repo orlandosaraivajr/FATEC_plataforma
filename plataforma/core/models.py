@@ -12,8 +12,9 @@ class User(AbstractUser):
     def __str__(self):
         if self.first_name == '':
             return self.email
-        return self.first_name
+        return self.first_name + ' ' + self.last_name
 
     class Meta:
         verbose_name_plural = 'Usuários'
         verbose_name = 'Usuário'
+        ordering=('first_name','email')

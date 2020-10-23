@@ -20,7 +20,7 @@ class UserModelTest(TestCase):
         self.assertTrue(User.objects.exists())
 
     def test_str_model(self):
-        self.assertEqual(str(self.cadastro), 'Orlando')
+        self.assertEqual(str(self.cadastro), 'Orlando Saraiva Jr')
 
     def test_username(self):
         username = self.cadastro.username

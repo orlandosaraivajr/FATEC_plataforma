@@ -3,7 +3,7 @@ from django.test import TestCase
 
 from core.functions import (register_new_teacher, register_new_company,
                             register_new_student, register_new_admin,
-                            authenticate)
+                            authenticate, update_user)
 from core.models import User
 
 
@@ -239,3 +239,74 @@ class Authenticate_Fail_user_not_active_Test(TestCase):
 
     def test_no_user_returned(self):
         self.assertEqual(self.user, None)
+
+
+class Update_user_test_1(TestCase):
+    def setUp(self):
+        self.username = 'user@user.br'
+        self.old_password = '123mudar'
+        self.new_password = '321mudar'
+        User = get_user_model()
+        register_new_student(self.username, self.old_password)
+        id = User.objects.get(email='user@user.br').pk
+        self.returned = update_user(id, self.new_password)
+        self.user = authenticate(self.username, self.new_password)
+
+    def test_updated_ok(self):
+        self.assertTrue(self.returned)
+
+    def test_email(self):
+        self.assertEqual(self.user.username, self.username)
+
+    def test_first_name(self):
+        self.assertEqual(self.user.first_name, '')
+
+    def test_last_name(self):
+        self.assertEqual(self.user.last_name, '')
+
+
+class Update_user_test_2(TestCase):
+    def setUp(self):
+        self.username = 'user@user.br'
+        self.old_password = '123mudar'
+        self.new_password = '321mudar'
+        User = get_user_model()
+        register_new_student(self.username, self.old_password)
+        id = User.objects.get(email='user@user.br').pk
+        self.returned = update_user(id, self.new_password,'John','Doe')
+        self.user = authenticate(self.username, self.new_password)
+
+    def test_updated_ok(self):
+        self.assertTrue(self.returned)
+
+    def test_email(self):
+        self.assertEqual(self.user.username, self.username)
+
+    def test_first_name(self):
+        self.assertEqual(self.user.first_name, 'John')
+
+    def test_last_name(self):
+        self.assertEqual(self.user.last_name, 'Doe')
+
+
+class Update_user_test_3(TestCase):
+    def setUp(self):
+        self.username = 'user@user.br'
+        self.old_password = '123mudar'
+        User = get_user_model()
+        register_new_student(self.username, self.old_password)
+        id = User.objects.get(email='user@user.br').pk
+        self.returned = update_user(id)
+        self.user = authenticate(self.username, self.old_password)
+
+    def test_updated_fail(self):
+        self.assertFalse(self.returned)
+
+    def test_email(self):
+        self.assertEqual(self.user.username, self.username)
+
+    def test_first_name(self):
+        self.assertEqual(self.user.first_name, '')
+
+    def test_last_name(self):
+        self.assertEqual(self.user.last_name, '')
