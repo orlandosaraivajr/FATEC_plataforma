@@ -12,8 +12,8 @@ def cadastro_empresa(request):
     else:
         form = UserCreateForm(request.POST)
         if form.is_valid():
-            email = request.POST.get('email', '')
-            password = request.POST.get('password', '')
+            email = form.cleaned_data.get('email', '')
+            password = form.cleaned_data.get('password', '')
             register_new_company(email, password)
         else:
             context = {'form': form}
@@ -55,8 +55,8 @@ def cadastro_professor(request):
     else:
         form = UserCreateForm(request.POST)
         if form.is_valid():
-            email = request.POST.get('email', '')
-            password = request.POST.get('password', '')
+            email = form.cleaned_data.get('email', '')
+            password = form.cleaned_data.get('password', '')
             register_new_teacher(email, password)
         else:
             context = {'form': form}
