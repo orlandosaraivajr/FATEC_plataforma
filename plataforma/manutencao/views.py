@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from core.decorators import area_admin
 from manutencao.forms import UserCreateForm, UserEditForm
-from core.functions import register_new_company, update_user, register_new_teacher
+from core.functions import register_new_company, update_user, register_new_teacher, register_new_student
 
 
 @area_admin
@@ -21,7 +21,6 @@ def cadastro_empresa(request):
         context = {'title': 'Cadastrar Empresas na plataforma FATEC',
                    'msg': 'Cadastro da empresa realizada com sucesso !',}
         return render(request, 'cadastro_edicao_concluido.html', context)
-
 
 @area_admin
 def editar_usuarios(request):
@@ -45,8 +44,6 @@ def editar_usuarios(request):
                    'msg': 'Edição da empresa realizada com sucesso !',}
         return render(request, 'cadastro_edicao_concluido.html', context)
 
-
-
 @area_admin
 def cadastro_professor(request):
     if request.method == 'GET':
@@ -63,4 +60,22 @@ def cadastro_professor(request):
             return render(request, 'cadastro_professor.html', context)
         context = {'title': 'Cadastrar Professores na plataforma FATEC',
                    'msg': 'Cadastro de docente realizado com sucesso !',}
+        return render(request, 'cadastro_edicao_concluido.html', context)
+
+@area_admin
+def cadastro_aluno(request):
+    if request.method == 'GET':
+        context = {'form': UserCreateForm()}
+        return render(request, 'cadastro_aluno.html', context)
+    else:
+        form = UserCreateForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('email', '')
+            password = form.cleaned_data.get('password', '')
+            register_new_student(email, password)
+        else:
+            context = {'form': form}
+            return render(request, 'cadastro_aluno.html', context)
+        context = {'title': 'Cadastrar aluno na plataforma FATEC',
+                   'msg': 'Cadastro de discente realizado com sucesso !',}
         return render(request, 'cadastro_edicao_concluido.html', context)
