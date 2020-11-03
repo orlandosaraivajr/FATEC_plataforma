@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'estagio.apps.EstagioConfig',
     'manutencao.apps.ManutencaoConfig',
+    'vitrine',
 ]
 
 AUTH_USER_MODEL = 'core.User'
@@ -81,7 +82,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
-HOME_URL = '/'
+HOME_URL = '/home/'
 
 LANGUAGE_CODE = 'pt-BR'
 TIME_ZONE = 'America/Sao_Paulo'

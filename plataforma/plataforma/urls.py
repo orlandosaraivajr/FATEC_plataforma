@@ -7,6 +7,7 @@ from plataforma import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
+    path('', include('vitrine.urls')),
     path('manutencao/', include('manutencao.urls')),
     path('estagio/', include('estagio.urls')),
 ]
