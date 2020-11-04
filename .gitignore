@@ -20,6 +20,9 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+.vscode/
+*/media/
+*.sqlite3
 build/
 develop-eggs/
 dist/
