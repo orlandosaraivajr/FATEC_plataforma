@@ -1,6 +1,11 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+CURSO_FATEC = (
+    ('0', 'Sistemas para Internet'),
+    ('1', 'Gestão Empresarial'),
+)
+
 
 class User(AbstractUser):
     is_student = models.BooleanField(verbose_name='Estudante', default=False)
