@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse as r
 from core.facade import area_trainee_coordinador, area_teacher, area_company
 from estagio.forms import ConvenioForm, DocumentoEstagioForm
-from estagio.forms import ProfessorConvenioForm
+from estagio.forms import ProfessorConvenioForm, ProfessorDocumentoEstagioForm
 from estagio.models import ConvenioModel, DocumentoEstagioModel
 from plataforma import settings
 
@@ -81,10 +81,28 @@ def professor_upload_convenio(request):
             novo_nome = form.renomear_arquivo(form.files['documento'].name)
             form.files['documento'].name = novo_nome
             ConvenioModel.objects.create(**form.cleaned_data)
-            return render(request, 'arquivo_enviado_com_sucesso.html')
+            return render(request, 'arquivo_enviado_pelo_professor.html')
         else:
             context = {'form': form}
             return render(request, 'professor_upload_convenio.html', context)
+
+
+@area_trainee_coordinador
+def professor_upload_documentos_estagio(request):
+    if request.method == 'GET':
+        context = {'form': ProfessorDocumentoEstagioForm()}
+        return render(request, 'professor_upload_documentos_estagio.html', context)
+    else:
+        form = ProfessorDocumentoEstagioForm(request.POST, request.FILES)
+        if form.is_valid():
+            novo_nome = form.renomear_arquivo(form.files['documento'].name)
+            form.files['documento'].name = novo_nome
+            DocumentoEstagioModel.objects.create(**form.cleaned_data)
+            return render(request, 'arquivo_enviado_pelo_professor.html')
+        else:
+            context = {'form': form}
+            return render(request, 'professor_upload_documentos_estagio.html', context)
+
 
 
 @area_trainee_coordinador

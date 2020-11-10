@@ -40,8 +40,8 @@ def editar_usuarios(request):
         else:
             context = {'form': form}
             return render(request, 'editar_usuarios.html', context)
-        context = {'title': 'Editar Empresas na plataforma FATEC',
-                   'msg': 'Edição da empresa realizada com sucesso !',}
+        context = {'title': 'Editar usuário na plataforma FATEC',
+                   'msg': 'Edição do usuário realizada com sucesso !',}
         return render(request, 'cadastro_edicao_concluido.html', context)
 
 @area_admin

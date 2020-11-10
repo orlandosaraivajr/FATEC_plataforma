@@ -4,16 +4,16 @@ from django.shortcuts import resolve_url as r
 from core.functions import register_new_company
 from core.models import User
 from core.facade import CreateTestUser
-from estagio.models import ConvenioModel
-from estagio.forms import ProfessorConvenioForm
+from estagio.models import ConvenioModel, DocumentoEstagioModel
+from estagio.forms import ProfessorDocumentoEstagioForm
 from plataforma import settings
 
 TINY_GIF = settings.TINY_GIF
-view_in_test = 'estagio:professor_upload_convenio'
-template_in_test = 'professor_upload_convenio.html'
+view_in_test = 'estagio:professor_upload_documentos_estagio'
+template_in_test = 'professor_upload_documentos_estagio.html'
 
 
-class uploadProfessorConvenioEstagioNoAuthGet(TestCase):
+class uploadProfessorDocumentoEstagioNoAuthGet(TestCase):
     def setUp(self):
         self.resp = self.client.get(r(view_in_test))
         self.resp2 = self.client.get(r(view_in_test), follow=True)
@@ -27,7 +27,7 @@ class uploadProfessorConvenioEstagioNoAuthGet(TestCase):
 
 
 @override_settings(DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage')
-class uploadProfessorConvenioEstagioGetOk(TestCase, CreateTestUser):
+class uploadProfessorDocumentoEstagioGetOk(TestCase, CreateTestUser):
     def setUp(self):
         data = self.create_user_trainee_coordinator()
         self.resp = self.client.post(r('core:login'), data)
@@ -44,7 +44,7 @@ class uploadProfessorConvenioEstagioGetOk(TestCase, CreateTestUser):
 
     def test_has_form(self):
         form = self.resp.context['form']
-        self.assertIsInstance(form, ProfessorConvenioForm)
+        self.assertIsInstance(form, ProfessorDocumentoEstagioForm)
 
 
 @override_settings(DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage')
@@ -65,7 +65,7 @@ class uploadProfConvenioEstagioGet_access_denied(TestCase, CreateTestUser):
 
 
 @override_settings(DEFAULT_FILE_STORAGE='inmemorystorage.InMemoryStorage')
-class uploadProfessorConvenioEstagioPostOk(TestCase, CreateTestUser):
+class uploadProfessorDocumentoEstagioPostOk(TestCase, CreateTestUser):
     def setUp(self):
         data = self.create_user_trainee_coordinator()
         self.resp = self.client.post(r('core:login'), data)
@@ -76,7 +76,9 @@ class uploadProfessorConvenioEstagioPostOk(TestCase, CreateTestUser):
         self.data = {}
         self.data['empresa'] = User.objects.all()[1].pk
         self.data['observacao'] = "agendado próxima visita"
-        self.data['validade'] = "1"
+        self.data['tipo_documento'] = "1"
+        self.data['curso_fatec'] = "0"
+        self.data['nome_aluno'] = "José da Silva"
         self.data['documento'] = self.imagem_mock
         self.resp = self.client.post(r(view_in_test), self.data)
 
@@ -84,7 +86,7 @@ class uploadProfessorConvenioEstagioPostOk(TestCase, CreateTestUser):
         self.assertEqual(200, self.resp.status_code)
 
     def test_saved_data(self):
-        self.assertTrue(ConvenioModel.objects.exists())
+        self.assertTrue(DocumentoEstagioModel.objects.exists())
 
     def test_template(self):
         self.assertTemplateUsed(self.resp, "arquivo_enviado_pelo_professor.html")
@@ -113,7 +115,7 @@ class uploadProfConvenioEstagioPost_access_denied(TestCase, CreateTestUser):
         self.assertFalse(ConvenioModel.objects.exists())
 
     def test_template(self):
-        self.assertTemplateUsed(self.resp, "professor_upload_convenio.html")
+        self.assertTemplateUsed(self.resp, "professor_upload_documentos_estagio.html")
         self.assertTemplateUsed(self.resp, "professor_sidebar.html")
 
 
@@ -137,6 +139,4 @@ class uploadConvenioEstagioPostNoFile(TestCase, CreateTestUser):
         self.assertFalse(ConvenioModel.objects.exists())
 
     def test_template(self):
-        self.assertTemplateUsed(self.resp, "professor_upload_convenio.html")
-        self.assertTemplateUsed(self.resp, "professor_sidebar.html")
-        self.assertTemplateUsed(self.resp, "professor_topbar.html")
+        self.assertTemplateUsed(self.resp, template_in_test)

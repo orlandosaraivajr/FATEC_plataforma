@@ -52,8 +52,9 @@
         <div id="documentos_estagiarios" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Documentos:</h6>
+              <a class="collapse-item" href="{% url 'estagio:professor_upload_documentos_estagio' %}">Envio de documentos</a>
               <a class="collapse-item" href="{% url 'estagio:pre_validar_documento_estagio' %}">Aprovar Documentação</a>
-
+              
           </div>
         </div>
       </li>
@@ -63,41 +64,26 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Meu perfil
+        Novas funcionalidades
       </div>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#configuracao" aria-expanded="true" aria-controls="collapsePages">
           <i class="fas fa-fw fa-folder"></i>
-          <span>Meu Perfil</span>
+          <span>Futuras funcionalidades</span>
         </a>
         <div id="configuracao" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Login Screens:</h6>
-            <a class="collapse-item" href="login.html">Login</a>
-            <a class="collapse-item" href="register.html">Register</a>
-            <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+            <h6 class="collapse-header">Painel:</h6>
+            <a class="collapse-item" href="">to-do</a>
             <div class="collapse-divider"></div>
-            <h6 class="collapse-header">Other Pages:</h6>
-            <a class="collapse-item" href="404.html">404 Page</a>
-            <a class="collapse-item" href="blank.html">Blank Page</a>
+            <h6 class="collapse-header">Painel 2:</h6>
+            <a class="collapse-item" href="">to-do</a>
           </div>
         </div>
       </li>
 
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
-      </li>
 
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">

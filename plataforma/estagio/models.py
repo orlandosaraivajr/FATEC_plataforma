@@ -2,7 +2,7 @@ from django.utils import timezone
 from datetime import timedelta
 from django.db import models
 from core.facade import User
-
+from core.models import CURSO_FATEC
 
 CATEGORIAS_DOCUMENTO = (
     ('0', 'Termo de compromisso de Estágio'),
@@ -12,11 +12,6 @@ CATEGORIAS_DOCUMENTO = (
     ('4', 'Ficha de avaliação do estagiário'),
     ('5', 'Relatório Parcial de Estágio'),
     ('6', 'Relatório Final de Estágio'),
-)
-
-CURSO_FATEC = (
-    ('0', 'Sistemas para Internet'),
-    ('1', 'Gestão Empresarial'),
 )
 
 VALIDADE_CONVENIO = (

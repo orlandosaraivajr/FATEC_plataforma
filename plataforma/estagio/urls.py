@@ -16,6 +16,9 @@ urlpatterns_empresa = [
          name='estagiarios_por_empresa'),
 ]
 urlpatterns_professor = [
+    path('professor_upload_documentos_estagio',
+         views.professor_upload_documentos_estagio,
+         name='professor_upload_documentos_estagio'),
     path('professor_upload_convenio', views.professor_upload_convenio,
          name='professor_upload_convenio'),
     path('pre_validar_convenio', views.pre_validar_convenio,

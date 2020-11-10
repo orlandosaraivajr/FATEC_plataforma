@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+<{% extends "base.html" %}
 {% load staticfiles %}
 {% load static %}
 
@@ -27,10 +27,16 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Plataforma FATEC - Módulo Professor</h1>
+            <h1 class="h3 mb-0 text-gray-800">Envio de documentos</h1>
           </div>
 
-
+            <form action={% url 'core:core_index_professor' %} novalidate method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Envio de documentos realizado com sucesso.</div>
+                <br>
+                <center>
+                <input type="submit" value="     OK     "/>
+            </form>
         </div>
         <!-- /.container-fluid -->
 
@@ -54,4 +60,3 @@
 
 
 {% endblock %}
-
