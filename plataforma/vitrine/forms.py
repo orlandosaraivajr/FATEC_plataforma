@@ -2,6 +2,7 @@ from django.core.exceptions import ValidationError
 from django import forms
 from django.forms import ModelForm
 from vitrine.models import VitrineModel
+from django.core.exceptions import ValidationError
 
 
 class VitrineForm(ModelForm):
@@ -17,14 +18,24 @@ class VitrineForm(ModelForm):
             'tipo_vaga':'Tipo da Vaga'
         }
         widgets = {
-            'aluno': forms.EmailInput(attrs={'class': 'form-control'}),
-            'descricao': forms.TextInput(attrs={'class': 'form-control'}),
+            'aluno': forms.HiddenInput(attrs={'class': 'form-control'}),
+            'descricao': forms.Textarea(attrs={'class': 'form-control'}),
+            'linkedin': forms.URLInput(attrs={'class': 'form-control'}),
+            'github': forms.URLInput(attrs={'class': 'form-control'}),
+            'curso': forms.Select(attrs={'class': 'form-control'}),
+            'tipo_vaga': forms.Select(attrs={'class': 'form-control'}),
         }
         error_messages = {
-            'aluno': {
-                'required': ("Preencha o aluno."),
-            },
             'descricao': {
-                'required': ("Informe a senha provisória."),
+                'required': ("Você precisa nos contar algo sobre você."),
+            },
+            'linkedin': {
+                'required': ("Você precisa colocar seu endereço do Linkedin"),
             }
         }
+
+    def clean_linkedin(self):
+        linkedin = self.cleaned_data['linkedin']
+        if len(linkedin) == 0:
+            raise ValidationError('Linkedin não pode ser vazio.')
+        return linkedin
