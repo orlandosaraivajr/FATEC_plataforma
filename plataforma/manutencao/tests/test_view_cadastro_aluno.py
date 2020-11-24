@@ -101,6 +101,7 @@ class cadastro_aluno_Post_Fail(TestCase, CreateTestUser):
         gravado = len(User.objects.filter(email__exact='orlando@saraiva.com'))
         self.assertEquals(0, gravado)
 
+
 class cadastro_empresa_access_denied_1(TestCase, CreateTestUser):
     def setUp(self):
         data = self.create_user_trainee_coordinator()

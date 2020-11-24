@@ -43,20 +43,39 @@
         </div>
       </li>
 
-      <!-- Nav Item - Estagiários -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#documentos_estagiarios" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-folder"></i>
           <span>Estagiários</span>
         </a>
-        <div id="documentos_estagiarios" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div id="documentos_estagiarios" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Documentos:</h6>
+            <a class="collapse-item" href="{% url 'estagio:listar_termos_compromisso_estagio' %}">Termo de compromisso</a>
+            <a class="collapse-item" href="{% url 'estagio:listar_planos_de_atividades' %}">Plano de Atividades</a>
+            <a class="collapse-item" href="{% url 'estagio:listar_termo_aditivo' %}">Termo aditivo</a>
+            <a class="collapse-item" href="{% url 'estagio:listar_rescisao_de_contrato' %}">Rescisão de Contrato</a>
+            <a class="collapse-item" href="{% url 'estagio:listar_ficha_avaliacao_estagiario' %}">Ficha de avaliação</a>
+            <a class="collapse-item" href="{% url 'estagio:listar_relatorio_parcial_estagio' %}">Relatório Parcial</a>
+            <a class="collapse-item" href="{% url 'estagio:listar_relatorio_final_estagio' %}">Relatório Final</a>              
+        </div>
+      </div>
+
+      <!-- Nav Item - Estagiários -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#envio_docs_estagiarios" aria-expanded="true" aria-controls="collapseUtilities">
+          <i class="fas fa-fw fa-folder"></i>
+          <span>Documentos</span>
+        </a>
+        <div id="envio_docs_estagiarios" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Documentos:</h6>
+            <h6 class="collapse-header">Envio:</h6>
               <a class="collapse-item" href="{% url 'estagio:professor_upload_documentos_estagio' %}">Envio de documentos</a>
               <a class="collapse-item" href="{% url 'estagio:pre_validar_documento_estagio' %}">Aprovar Documentação</a>
-              
           </div>
         </div>
+
+
       </li>
 
       <!-- Divider -->

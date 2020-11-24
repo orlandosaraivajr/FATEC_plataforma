@@ -198,3 +198,64 @@ def estagiarios_por_empresa(request):
         return render(request, 'estagiarios_por_empresa.html', context)
     else:
         return HttpResponseRedirect(r('core:core_index_empresa'))
+
+
+@area_teacher
+def listar_termos_compromisso_estagio(request):
+    context = {'media_url': settings.MEDIA_URL}
+    documentos = DocumentoEstagioModel.objects.termos_compromisso_estagio()
+    context['tipo_documento'] = "Termo de compromisso de Estágio"
+    context['documentos'] = documentos
+    return render(request, 'listar_documentos.html', context)
+
+
+@area_teacher
+def listar_planos_de_atividades(request):
+    context = {'media_url': settings.MEDIA_URL}
+    documentos = DocumentoEstagioModel.objects.planos_de_atividades()
+    context['tipo_documento'] = "Plano de Atividades"
+    context['documentos'] = documentos
+    return render(request, 'listar_documentos.html', context)
+
+
+@area_teacher
+def listar_termo_aditivo(request):
+    context = {'media_url': settings.MEDIA_URL}
+    documentos = DocumentoEstagioModel.objects.termos_aditivo()
+    context['tipo_documento'] = "Termo Aditivo"
+    context['documentos'] = documentos
+    return render(request, 'listar_documentos.html', context)
+
+
+@area_teacher
+def listar_rescisao_de_contrato(request):
+    context = {'media_url': settings.MEDIA_URL}
+    documentos = DocumentoEstagioModel.objects.rescisao_de_contrato()
+    context['tipo_documento'] = "Rescisão de Contrato"
+    context['documentos'] = documentos
+    return render(request, 'listar_documentos.html', context)
+
+
+@area_teacher
+def listar_ficha_avaliacao_estagiario(request):
+    context = {'media_url': settings.MEDIA_URL}
+    documentos = DocumentoEstagioModel.objects.ficha_avaliacao_estagiario()
+    context['tipo_documento'] = "Ficha de avaliação do estagiário"
+    context['documentos'] = documentos
+    return render(request, 'listar_documentos.html', context)
+
+@area_teacher
+def listar_relatorio_parcial_estagio(request):
+    context = {'media_url': settings.MEDIA_URL}
+    documentos = DocumentoEstagioModel.objects.relatorio_parcial_estagio()
+    context['tipo_documento'] = "Relatório Parcial do Estágio"
+    context['documentos'] = documentos
+    return render(request, 'listar_documentos.html', context)
+
+@area_teacher
+def listar_relatorio_final_estagio(request):
+    context = {'media_url': settings.MEDIA_URL}
+    documentos = DocumentoEstagioModel.objects.relatorio_final_estagio()
+    context['tipo_documento'] = "Relatório Final do Estágio"
+    context['documentos'] = documentos
+    return render(request, 'listar_documentos.html', context)

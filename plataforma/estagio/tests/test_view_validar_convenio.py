@@ -63,8 +63,8 @@ class validar_convenio_Post(TestCase, CreateTestUser):
         tags = (
             ('Módulo Empresa', 0),
             ('Módulo Professor', 1),
-            ('<div', 39),
-            ('</div>', 39),
+            ('<div', 41),
+            ('</div>', 41),
             ('/media/', 1),
             ('<input', 6),
         )

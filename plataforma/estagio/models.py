@@ -69,6 +69,29 @@ class ConvenioModel(models.Model):
         verbose_name = 'Convênio de Estágio'
 
 
+class DocumentoEstagioManager(models.Manager):
+    def termos_compromisso_estagio(self):
+        return DocumentoEstagioModel.objects.filter(tipo_documento=0).order_by('-created_at')
+
+    def planos_de_atividades(self):
+        return DocumentoEstagioModel.objects.filter(tipo_documento=1).order_by('-created_at')
+
+    def termos_aditivo(self):
+        return DocumentoEstagioModel.objects.filter(tipo_documento=2).order_by('-created_at')
+
+    def rescisao_de_contrato(self):
+        return DocumentoEstagioModel.objects.filter(tipo_documento=3).order_by('-created_at')
+
+    def ficha_avaliacao_estagiario(self):
+        return DocumentoEstagioModel.objects.filter(tipo_documento=4).order_by('-created_at')
+
+    def relatorio_parcial_estagio(self):
+        return DocumentoEstagioModel.objects.filter(tipo_documento=5).order_by('-created_at')
+
+    def relatorio_final_estagio(self):
+        return DocumentoEstagioModel.objects.filter(tipo_documento=6).order_by('-created_at')
+
+
 class DocumentoEstagioModel(models.Model):
     empresa = models.ForeignKey(User, on_delete=models.CASCADE)
     nome_aluno = models.TextField(default='', blank=False)
@@ -94,6 +117,7 @@ class DocumentoEstagioModel(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
+    objects = DocumentoEstagioManager()
     @property
     def tipo_de_documento(self):
         return CATEGORIAS_DOCUMENTO[int(self.tipo_documento)][1]

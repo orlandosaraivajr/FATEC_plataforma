@@ -48,8 +48,8 @@ class pre_validar_convenio_Get(TestCase, CreateTestUser):
         tags = (
             ('Módulo Empresa', 0),
             ('Módulo Professor', 1),
-            ('<div', 39),
-            ('</div>', 39),
+            ('<div', 41),
+            ('</div>', 41),
             ('/media/', 1),
             ('<input', 4),
         )
@@ -75,8 +75,8 @@ class pre_validar_convenio_NoDataGet(TestCase, CreateTestUser):
         tags = (
             ('Módulo Empresa', 0),
             ('Módulo Professor', 1),
-            ('<div', 32),
-            ('</div>', 32),
+            ('<div', 34),
+            ('</div>', 34),
             ('/media/', 0),
             ('<input', 1),
         )

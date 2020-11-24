@@ -50,8 +50,8 @@ class pre_validar_documento_Get(TestCase, CreateTestUser):
         tags = (
             ('Módulo Empresa', 0),
             ('Módulo Professor', 1),
-            ('<div', 39),
-            ('</div>', 39),
+            ('<div', 41),
+            ('</div>', 41),
             ('/media/', 1),
             ('<input', 4),
             ('.pdf', 1),
@@ -82,8 +82,8 @@ class pre_validar_documento_NoDataGet(TestCase, CreateTestUser):
         tags = (
             ('Módulo Empresa', 0),
             ('Módulo Professor', 1),
-            ('<div', 32),
-            ('</div>', 32),
+            ('<div', 34),
+            ('</div>', 34),
             ('/media/', 0),
             ('<input', 1),
             ('Aprovar Documentação de Estágio', 1),
