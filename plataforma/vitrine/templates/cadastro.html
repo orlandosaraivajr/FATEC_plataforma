@@ -40,18 +40,15 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <form action={% url 'manutencao:cadastro_aluno' %} novalidate method="POST" enctype="multipart/form-data">
+                      <form action={% url 'vitrine:cadastro' %} novalidate method="POST" enctype="multipart/form-data">
                           {% csrf_token %}
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            {{ form.aluno.label}}
-                          </div>
-                          {{ form.aluno }}
-                          <br>
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            {{ form.descricao.label }}
-                          </div>
-                          {{ form.descricao }}
-                          <br><br>
+                          <input type='hidden' name='aluno' value = "{{user.pk }}"/>
+                          {% for field in form %}
+                            {% if field.label != 'Nome' %}
+                              {{ field.label_tag }}
+                              {{ field }}
+                            {% endif %}
+                          {% endfor %}
                           <input type="submit" value="Cadastrar"/>
                       </form>
                     </div>

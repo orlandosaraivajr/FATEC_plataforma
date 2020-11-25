@@ -19,8 +19,8 @@ class VitrineFormTest(TestCase):
         self.form = VitrineForm()
 
     def test_form_has_fields(self):
-        expected = ['aluno','descricao', 'linkedin']
-        expected += ['github', 'curso', 'tipo_vaga']
+        expected = ['aluno', 'curso', 'tipo_vaga']
+        expected += ['descricao', 'linkedin' , 'github']
         self.assertSequenceEqual(expected, list(self.form.fields))
 
 class DataVitrineFormTest(TestCase, CreateTestUser):

@@ -8,7 +8,7 @@ from django.core.exceptions import ValidationError
 class VitrineForm(ModelForm):
     class Meta:
         model = VitrineModel
-        fields = ('aluno', 'descricao', 'linkedin', 'github', 'curso', 'tipo_vaga')
+        fields = ('aluno', 'curso', 'tipo_vaga', 'descricao', 'linkedin', 'github' )
         labels = {
             'aluno': 'Nome',
             'descricao': 'Descricao',
@@ -19,11 +19,11 @@ class VitrineForm(ModelForm):
         }
         widgets = {
             'aluno': forms.HiddenInput(attrs={'class': 'form-control'}),
+            'curso': forms.Select(attrs={'class': 'form-control'}),
+            'tipo_vaga': forms.Select(attrs={'class': 'form-control'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control'}),
             'linkedin': forms.URLInput(attrs={'class': 'form-control'}),
             'github': forms.URLInput(attrs={'class': 'form-control'}),
-            'curso': forms.Select(attrs={'class': 'form-control'}),
-            'tipo_vaga': forms.Select(attrs={'class': 'form-control'}),
         }
         error_messages = {
             'descricao': {
