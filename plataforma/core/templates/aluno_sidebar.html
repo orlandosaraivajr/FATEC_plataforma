@@ -29,20 +29,19 @@
 
       <!-- Nav Item - Estágio -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#area_estagio" aria-expanded="true" aria-controls="area_estagio">
           <i class="fas fa-fw fa-cog"></i>
           <span>Realização Estágio</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+        <div id="area_estagio" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
+            <h6 class="collapse-header">Informações:</h6>
+            <a class="collapse-item" href="">Regras</a>
           </div>
         </div>
       </li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
+      <!-- Nav Item - Disciplina Estágio Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fas fa-fw fa-wrench"></i>
@@ -50,11 +49,8 @@
         </a>
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Utilities:</h6>
-            <a class="collapse-item" href="utilities-color.html">Colors</a>
-            <a class="collapse-item" href="utilities-border.html">Borders</a>
-            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-            <a class="collapse-item" href="utilities-other.html">Other</a>
+            <h6 class="collapse-header">Disciplina:</h6>
+            <a class="collapse-item" href="">Informações</a>
           </div>
         </div>
       </li>
@@ -63,7 +59,7 @@
       <div class="sidebar-heading">
         Vitrine
       </div>
-      <!-- Nav Item - Utilities Collapse Menu -->
+      <!-- Nav Item - Vitrine Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVitrine" aria-expanded="true" aria-controls="collapseVitrine">
           <i class="fas fa-fw fa-wrench"></i>
@@ -73,6 +69,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Opções:</h6>
             <a class="collapse-item" href="{% url 'vitrine:cadastro' %}">Cadastrar</a>
+            <a class="collapse-item" href="{% url 'vitrine:remover' %}">Remover</a>
           </div>
         </div>
       </li>

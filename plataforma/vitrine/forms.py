@@ -8,7 +8,8 @@ from django.core.exceptions import ValidationError
 class VitrineForm(ModelForm):
     class Meta:
         model = VitrineModel
-        fields = ('aluno', 'curso', 'tipo_vaga', 'descricao', 'linkedin', 'github' )
+        fields = ('aluno', 'curso', 'tipo_vaga', 'descricao',
+                  'linkedin', 'github')
         labels = {
             'aluno': 'Nome',
             'descricao': 'Descricao',
@@ -34,8 +35,10 @@ class VitrineForm(ModelForm):
             }
         }
 
-    def clean_linkedin(self):
-        linkedin = self.cleaned_data['linkedin']
-        if len(linkedin) == 0:
-            raise ValidationError('Linkedin não pode ser vazio.')
-        return linkedin
+    def clean(self):
+        self.cleaned_data = super().clean()
+        sem_linkein = not self.cleaned_data.get('linkedin')
+        sem_github = not self.cleaned_data.get('github')
+        if sem_linkein and sem_github:
+            raise ValidationError('Informe ao menos uma rede social.')
+        return self.cleaned_data

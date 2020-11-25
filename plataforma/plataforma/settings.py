@@ -23,7 +23,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'estagio.apps.EstagioConfig',
     'manutencao.apps.ManutencaoConfig',
-    'vitrine',
+    'vitrine.apps.VitrineConfig',
 ]
 
 AUTH_USER_MODEL = 'core.User'

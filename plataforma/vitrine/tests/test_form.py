@@ -23,6 +23,7 @@ class VitrineFormTest(TestCase):
         expected += ['descricao', 'linkedin' , 'github']
         self.assertSequenceEqual(expected, list(self.form.fields))
 
+
 class DataVitrineFormTest(TestCase, CreateTestUser):
     def setUp(self):
         data = self.create_user_student()
@@ -59,9 +60,6 @@ class DataVitrineFormTest(TestCase, CreateTestUser):
     def test_linkedin(self):
         self.assertEqual('http://www.linkedin.com/orlandosaraivajr', self.form.cleaned_data['linkedin'])
 
-    def test_curso(self):
-        self.assertEqual('0', self.form.cleaned_data['curso'])
-
     def test_tipo_vaga(self):
         self.assertEqual('2', self.form.cleaned_data['tipo_vaga'])
 
@@ -83,7 +81,6 @@ class WrongDataVitrineForm(TestCase, CreateTestUser):
         self.form = VitrineForm(data)
         self.validated = self.form.is_valid()
 
-    
     def test_valid_form(self):
         self.assertFalse(self.validated)
     
@@ -91,6 +88,27 @@ class WrongDataVitrineForm(TestCase, CreateTestUser):
         mensagemEsperada = "Você precisa nos contar algo sobre você."
         self.assertEqual(self.form.errors['descricao'][0], mensagemEsperada)
 
-    def test_erro_linkedin(self):
-        mensagemEsperada = "Linkedin não pode ser vazio."
-        self.assertEqual(self.form.errors['linkedin'][0], mensagemEsperada)
+
+class Without_github_or_linkedin_VitrineForm(TestCase, CreateTestUser):
+    def setUp(self):
+        data = self.create_user_student()
+        self.client.post(r(self.login_url), data)
+        aluno = User.objects.all()[0]
+        data = {
+            'aluno': aluno.pk,
+            'descricao': 'quero trabalhar',
+            'linkedin': '',
+            'github': '',
+            'curso' : '0',
+            'tipo_vaga': '2'
+        }
+
+        self.form = VitrineForm(data)
+        self.validated = self.form.is_valid()
+
+    def test_valid_form(self):
+        self.assertFalse(self.validated)
+    
+    def test_erro_descricao(self):
+        mensagemEsperada = "Informe ao menos uma rede social."
+        self.assertEqual(self.form.errors['__all__'][0], mensagemEsperada)
