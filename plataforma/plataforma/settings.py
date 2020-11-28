@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'estagio.apps.EstagioConfig',
     'manutencao.apps.ManutencaoConfig',
     'vitrine.apps.VitrineConfig',
+    'rest_framework',
 ]
 
 AUTH_USER_MODEL = 'core.User'
@@ -102,3 +103,12 @@ TINY_PDF = BytesIO(
     b'>>endobj 3 0 obj<</Type/Page/MediaBox[0 0 3 3]>>endobj\nxref\n0 4\n0000000000 65535 f\n000000'
     b'0010 00000 n\n0000000053 00000 n\n0000000102 00000 n\ntrailer<</Size 4/Root 1 0 R>>\nstartxre'
     b'f\n149\n%EOF\n')
+
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}
