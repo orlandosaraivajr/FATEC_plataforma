@@ -1,5 +1,78 @@
-<HTML>
-    <body>
-        <h2>Os talentos estarão aqui.</h2>
-    </body>
-</HTML>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+
+
+{% block content %}
+
+ <!-- Page Wrapper -->
+ <div id="wrapper">
+
+    <!-- Sidebar -->
+    {% include "vitrine_sidebar.html" %}
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        {% include "vitrine_topbar.html" %}
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        
+      
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                  <div class="card border-left-primary shadow mb-4">
+                    <div class="card-body">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                          <h3 class="card-title">Estágio</h3>
+                          <h5>Alice Liddel</h5>
+                          <h5>Curso: Sistemas para Internet</h5>
+                          <p class="card-text mt-3">Alice is a freelance web designer and developer based in London. 
+                            She is specialized in HTML5, CSS3, JavaScript, Bootstrap, etc.</p>
+                          <div class="collapse" id="collapse">
+                            <div class="container p-0 d-inline-flex mb-3">
+                              <div class="col d-inline-flex p-0">
+                                <h3 class="m-0"><i class="fab fa-linkedin"></i></h3>
+                                <span class="mt-1 ml-2">Linkedin</span>
+                              </div>
+                              <div class="col d-inline-flex p-0">
+                                <h3 class="m-0"><i class="fab fa-github"></i></h3>
+                                <span class="mt-1 ml-2">Github</span>
+                              </div>
+                            </div>
+                          </div>
+                          <button class="btn btn-primary" type="button" 
+                            data-toggle="collapse" data-target="#collapse" 
+                              aria-expanded="false" aria-controls="collapse">
+                              Ver mais
+                          </button>
+                        </div>
+                      </div>
+                    </div>  
+                  </div>
+                </div>
+
+                
+
+                
+
+            </div>
+          </div>
+    
+    </div>
+        {% include "rodape.html" %}
+    </div>
+  </div>
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+{% endblock %}
