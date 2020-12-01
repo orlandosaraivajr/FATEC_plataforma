@@ -3,7 +3,7 @@ from django.test import TestCase
 
 from core.functions import (register_new_teacher, register_new_company,
                             register_new_student, register_new_admin,
-                            authenticate, update_user)
+                            authenticate, update_user, register_student)
 from core.models import User
 
 
@@ -310,3 +310,24 @@ class Update_user_test_3(TestCase):
 
     def test_last_name(self):
         self.assertEqual(self.user.last_name, '')
+
+
+class register_student_kwargs_OK(TestCase):
+    def setUp(self):
+        context = dict(first_name='Orlando', last_name='Saraiva',
+                       username='aluno_teste@fatec.sp.gov.br',
+                       password='123mud@r')
+        self.register = register_student(**context)
+
+    def test_saved(self):
+        self.assertTrue(self.register)
+
+
+class register_student_kwargs_Fail(TestCase):
+    def setUp(self):
+        context = dict(first_name='Orlando', last_name='Saraiva',
+                       password='123mud@r')
+        self.register = register_student(**context)
+
+    def test_saved(self):
+        self.assertFalse(self.register)

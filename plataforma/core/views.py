@@ -2,8 +2,9 @@ from django.contrib.auth import logout as auth_logout
 from django.shortcuts import redirect, render
 from core.decorators import (area_student, area_teacher,
                              area_company, area_admin)
-from core.functions import auth_request
+from core.functions import auth_request, register_student, authenticate
 from django.contrib.auth.decorators import login_required
+from core.forms import CadastroNovoAlunoForm
 
 
 def login(request):
@@ -60,3 +61,17 @@ def index_manutencao(request):
 def equipe_fatec(request):
     context = {}
     return render(request, 'equipe_fatec.html', context)
+
+
+def cadastro_novo_aluno(request):
+    if request.method == 'GET':
+        context = {'form': CadastroNovoAlunoForm()}
+        return render(request, 'cadastro_novo_aluno.html', context)
+    else:
+        form = CadastroNovoAlunoForm(request.POST)
+        if form.is_valid():
+            register_student(**form.cleaned_data)
+            return redirect('core:login')
+        else:
+            context = {'form': form}
+            return render(request, 'cadastro_novo_aluno.html', context)

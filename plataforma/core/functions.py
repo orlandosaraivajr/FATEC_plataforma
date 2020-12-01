@@ -14,8 +14,7 @@ def auth_request(request):
         if user is not None:
             auth_login(request, user)
             return True
-    else:
-        return False
+    return False
 
 
 def authenticate(email=None, password=None):
@@ -35,6 +34,23 @@ def register_new_student(email=None, password=None):
         User = get_user_model()
         novo_aluno = User.objects.create_user(
             email, email, password, is_student=True)
+        novo_aluno.save()
+        return True
+    else:
+        return False
+
+
+def register_student(**kwargs):
+    name = kwargs.get('first_name', None)
+    last_name = kwargs.get('last_name', None)
+    email = kwargs.get('username', None)
+    password = kwargs.get('password', None)
+    if name and email and password:
+        User = get_user_model()
+        novo_aluno = User.objects.create_user(
+            first_name=name, last_name=last_name,
+            username=email, email=email,
+            password=password, is_student=True)
         novo_aluno.save()
         return True
     else:

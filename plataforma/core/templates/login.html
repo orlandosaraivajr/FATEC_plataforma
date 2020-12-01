@@ -37,19 +37,24 @@
                       <input type="password" class="form-control form-control-user" name="password" id="password" placeholder="Senha">
                     </div>
                     <div class="form-group">
+                  <!--
+
                       <div class="custom-control custom-checkbox small">
                         <input type="checkbox" class="custom-control-input" id="customCheck">
                         <label class="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
+                   -->
                     <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                   </form>
                   <hr>
+                  <!--
                   <div class="text-center">
                     <a class="small" href="#">Esqueci minha senha</a>
                   </div>
+                  -->
                   <div class="text-center">
-                    <a class="small" href="#">Criar uma conta</a>
+                    <a class="small" href="{% url 'core:cadastro_novo_aluno' %}">Criar uma conta aluno</a>
                   </div>
                 </div>
               </div>

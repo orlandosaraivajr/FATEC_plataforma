@@ -13,10 +13,10 @@ class VitrineForm(ModelForm):
         labels = {
             'aluno': 'Nome',
             'descricao': 'Descricao',
-            'linkedin':'Link Linkedin',
-            'github':'Link Github',
-            'curso':'Curso',
-            'tipo_vaga':'Tipo da Vaga'
+            'linkedin': 'Link Linkedin',
+            'github': 'Link Github',
+            'curso': 'Curso',
+            'tipo_vaga': 'Tipo da Vaga'
         }
         widgets = {
             'aluno': forms.HiddenInput(attrs={'class': 'form-control'}),

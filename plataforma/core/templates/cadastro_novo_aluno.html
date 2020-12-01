@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load static %}
+
+
+{% block content %}
+
+<body class="bg-gradient-primary">
+
+  <div class="container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+      <div class="col-xl-10 col-lg-12 col-md-9">
+
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+              <div class="col-lg-6">
+                  <center>
+                    <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="{% static 'img/fatec.jpg' %}" alt="">
+                  </center>
+              </div>
+              <div class="col-lg-6">
+                <div class="p-5">
+                  <div class="text-center">
+                    <h1 class="h4 text-gray-900 mb-4">Plataforma FATEC Araras</h1>
+                  </div>
+                  <form method="POST" action="{% url 'core:cadastro_novo_aluno' %}" >
+                  {% csrf_token %}
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                    {{ form.first_name.label }}
+                  </div>
+                  {{ form.first_name }}
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                    {{ form.last_name.label }}
+                  </div>
+                  {{ form.last_name }}
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                    {{ form.username.label }}
+                  </div>
+                  {{ form.username }}
+                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                    {{ form.password.label }}
+                  </div>
+                  {{ form.password }}
+                  <br>
+                  {% if form.errors %}
+                  {% for field in form %}
+                    {% if field.errors %}
+                      {% for error in field.errors %}
+                        <strong>{{ error|escape }}</strong><br>
+                      {% endfor %}                    
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+                  <br>
+                    <button type="submit" class="btn btn-primary btn-user btn-block">Criar conta aluno</button>
+                  </form>
+                  <hr>
+
+                  <div class="text-center">
+                    <a class="small" href="{% url 'core:home' %}">Voltar para o login</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+{% endblock %}

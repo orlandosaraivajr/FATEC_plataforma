@@ -11,6 +11,7 @@ urlpatterns = [
 ]
 urlpatterns_aluno = [
     path('index_aluno', views.index_aluno, name='core_index_aluno'),
+    path('cadastro_novo_aluno', views.cadastro_novo_aluno, name='cadastro_novo_aluno'),
 ]
 
 urlpatterns_professor = [
