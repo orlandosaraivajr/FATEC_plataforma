@@ -68,6 +68,7 @@ class cadastro_novo_aluno_PostFail(TestCase):
 
     def test_create(self):
         self.assertFalse(User.objects.exists())
+        self.assertEquals(len(User.objects.all()), 0)
 
     def test_template(self):
         self.assertTemplateUsed(self.resp, template_in_test)
@@ -86,6 +87,51 @@ class cadastro_novo_aluno_PostFail(TestCase):
             ('<input type="password"', 1),
             ('<button type="submit"', 1),
             ('</form>', 1),
+        )
+        for text, count in tags:
+            with self.subTest():
+                self.assertContains(self.resp, text, count)
+
+
+class cadastro_novo_aluno_PostFail2(TestCase):
+    def setUp(self):
+        from django.contrib.auth import get_user_model
+        User = get_user_model()
+        self.cadastro = User(
+            username='orlando.nascimento@fatec.sp.gov.br',
+            email='orlando.nascimento@fatec.sp.gov.br',
+            password='123mudar', first_name='Orlando',
+            last_name='Saraiva Jr')
+        self.cadastro.save()
+        self.data = dict(first_name='Orlando', last_name='Saraiva', 
+                         username='orlando.nascimento@fatec.sp.gov.br',
+                         password='123mud@r')
+        self.resp = self.client.post(r(view_in_test), self.data)
+        self.resp2 = self.client.post(r(view_in_test),
+                                      self.data, follow=True)
+
+    def test_create(self):
+        self.assertTrue(User.objects.exists())
+        self.assertEquals(len(User.objects.all()), 1)
+
+    def test_template(self):
+        self.assertTemplateUsed(self.resp, template_in_test)
+
+    def test_200(self):
+        self.assertEqual(200, self.resp.status_code)
+        self.assertEqual(200, self.resp2.status_code)
+
+    def test_html(self):
+        tags = (
+            ('<form', 1),
+            ('<input', 5),
+            ('<input type="hidden"', 1),
+            ('<input type="text"', 2),
+            ('<input type="email"', 1),
+            ('<input type="password"', 1),
+            ('<button type="submit"', 1),
+            ('</form>', 1),
+            ('Um usuário com este nome de usuário já existe.', 1),
         )
         for text, count in tags:
             with self.subTest():
