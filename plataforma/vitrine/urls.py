@@ -12,4 +12,6 @@ urlpatterns = [
     path('tipo/<int:tipo_vaga>', views.showcase_tipo_vaga, name='showcase_tipo_vaga'),
     path('api/vitrine/', views.VitrineList.as_view(), name='vitrine-list'),
     path('api/vitrine/<int:pk>/', views.VitrineDetail.as_view(), name='vitrine-Detail'),
+    path('api/vitrine/', views.VitrineList.as_view(), name='vitrine-list'),
+    path('api/vitrine/<int:pk>/', views.VitrineDetail.as_view(), name='vitrine-Detail'),
 ]
