@@ -5,7 +5,19 @@ from vitrine.models import VitrineModel
 
 
 def showcase(request):
-    return render(request, 'showcase.html')
+    alunos = VitrineModel.objects.get_alunos()
+    return render(request, 'showcase.html', {'alunos': alunos})
+
+
+def showcase_tipo_vaga(request, tipo_vaga):
+    alunos = VitrineModel.objects.get_tipo_vaga(tipo_vaga)
+    return render(request, 'showcase.html', {'alunos': alunos})
+
+
+def showcase_tipo_curso(request, curso):
+    alunos = VitrineModel.objects.get_tipo_curso(curso)
+    return render(request, 'showcase.html', {'alunos': alunos})
+
 
 @area_student
 def cadastro(request):
