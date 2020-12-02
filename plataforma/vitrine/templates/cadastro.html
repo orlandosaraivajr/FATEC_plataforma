@@ -24,47 +24,75 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">{{ cabecalho}}</h1>
+            <h1 class="h3 mb-0 text-gray-800">{{ cabecalho }}</h1>
           </div>
         </div>
       </div>
 
-      {% if form.errors %}
-      <div class="row">
-        {% for field in form %}
-          {% if field.errors %}
+      <div class="container">
+        {% if form.errors %}
+          <div class="row">
+            {% for field in form %}
+              {% if field.errors %}
+                <div class="col-xl-6 col-md-12 mb-4">
+                  <div class="card border-left-danger shadow h-100 py-2">
+                    <div class="card-body">
+                      <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                {% for error in field.errors %}
+                                  <strong>{{ error|escape }}</strong>
+                                {% endfor %}
+                              </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+        {% if form.non_field_errors  %}
+          <div class="row">}
             <div class="col-xl-6 col-md-12 mb-4">
               <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                          <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            {% for error in field.errors %}
-                              <strong>{{ error|escape }}</strong>
-                            {% endfor %}
-                          </div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                        {% for error in form.non_field_errors %}
+                          <strong>{{ error|escape }}</strong>
+                        {% endfor %}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-      {% endif %}
-      {% if form.non_field_errors  %}
-      <div class="row">}
-        <div class="col-xl-6 col-md-12 mb-4">
-          <div class="card border-left-danger shadow h-100 py-2">
-            <div class="card-body">
-              <div class="row no-gutters align-items-center">
-                <div class="col mr-2">
-                  <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                    {% for error in form.non_field_errors %}
-                      <strong>{{ error|escape }}</strong>
-                    {% endfor %}
+          </div>
+        {% endif %}
+        <!-- Content Row -->
+        <div class="row">
+
+          <!-- Dados em um card -->
+          <div class="col-xl-6 col-md-12 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <form action="{% url 'vitrine:cadastro' %}" novalidate method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type='hidden' name='aluno' value = "{{user.pk }}"/>
+                        {% for field in form %}
+                          {% if field.label != 'Nome' %}
+                            {{ field.label_tag }}
+                            {{ field }}
+                          {% endif %}
+                        {% endfor %}
+                        <input type="submit" value="Cadastrar"/>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -72,34 +100,6 @@
           </div>
         </div>
       </div>
-      {% endif %}
-          <!-- Content Row -->
-          <div class="row">
-
-            <!-- Dados em um card -->
-            <div class="col-xl-6 col-md-12 mb-4">
-              <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <form action={% url 'vitrine:cadastro' %} novalidate method="POST" enctype="multipart/form-data">
-                          {% csrf_token %}
-                          <input type='hidden' name='aluno' value = "{{user.pk }}"/>
-                          {% for field in form %}
-                            {% if field.label != 'Nome' %}
-                              {{ field.label_tag }}
-                              {{ field }}
-                            {% endif %}
-                          {% endfor %}
-                          <input type="submit" value="Cadastrar"/>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
 
     {% include "rodape.html" %}
     </div>

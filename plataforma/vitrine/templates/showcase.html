@@ -23,51 +23,62 @@
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        
-      
-
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
-                  <div class="card border-left-primary shadow mb-4">
-                    <div class="card-body">
-                      <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                          <h3 class="card-title">Estágio</h3>
-                          <h5>Alice Liddel</h5>
-                          <h5>Curso: Sistemas para Internet</h5>
-                          <p class="card-text mt-3">Alice is a freelance web designer and developer based in London. 
-                            She is specialized in HTML5, CSS3, JavaScript, Bootstrap, etc.</p>
-                          <div class="collapse" id="collapse">
-                            <div class="container p-0 d-inline-flex mb-3">
-                              <div class="col d-inline-flex p-0">
-                                <h3 class="m-0"><i class="fab fa-linkedin"></i></h3>
-                                <span class="mt-1 ml-2">Linkedin</span>
-                              </div>
-                              <div class="col d-inline-flex p-0">
-                                <h3 class="m-0"><i class="fab fa-github"></i></h3>
-                                <span class="mt-1 ml-2">Github</span>
+              {% if alunos %}
+                {% for aluno in alunos %}
+                  <div class="col-md-6">
+                    <div class="card border-left-primary shadow mb-4">
+                      <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                          <div class="col mr-2">
+                            <h3 class="card-title">{{ aluno.get_tipo_vaga_display }}</h3>
+                            <h5>{{ aluno.aluno.first_name }}</h5>
+                            <h5>Curso: {{ aluno.get_curso_display }}</h5>
+                            <p class="card-text mt-3">{{ aluno.descricao }}</p>
+                            <div class="collapse" id="collapse_{{ aluno.pk }}">
+                              <div class="container p-0 d-inline-flex mb-3">
+                                {% if aluno.linkedin %}
+                                  <div class="col d-inline-flex p-0">
+                                    <a href="{{ aluno.linkedin }}" target="_blank">
+                                      <div class="d-inline-flex">
+                                        <h3 class="m-0"><i class="fab fa-linkedin"></i></h3>
+                                        <span class="mt-1 ml-2">Linkedin</span>
+                                      </div>
+                                    </a>
+                                  </div>
+                                {% endif %}
+
+                                {% if aluno.github %}
+                                  <div class="col d-inline-flex p-0">
+                                    <a href="{{ aluno.github }}" target="_blank">
+                                      <div class="d-inline-flex">
+                                        <h3 class="m-0"><i class="fab fa-github"></i></h3>
+                                        <span class="mt-1 ml-2">Github</span>
+                                      </div>
+                                    </a>
+                                  </div>
+                                {% endif %}
                               </div>
                             </div>
+                            <button class="btn btn-primary" type="button" 
+                              data-toggle="collapse" data-target="#collapse_{{aluno.pk}}" 
+                                aria-expanded="false" aria-controls="collapse">
+                                Ver mais
+                            </button>
                           </div>
-                          <button class="btn btn-primary" type="button" 
-                            data-toggle="collapse" data-target="#collapse" 
-                              aria-expanded="false" aria-controls="collapse">
-                              Ver mais
-                          </button>
                         </div>
-                      </div>
-                    </div>  
+                      </div>  
+                    </div>
                   </div>
-                </div>
-
-                
-
-                
-
+                {% endfor %}
+              {% else %}
+                  <div class="container">
+                    <h1>Nenhum resultado encontrado!</h1>
+                  </div>
+              {% endif %}
             </div>
           </div>
-    
     </div>
         {% include "rodape.html" %}
     </div>

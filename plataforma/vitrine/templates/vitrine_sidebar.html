@@ -16,7 +16,7 @@
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'core:home' %}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Login</span></a>
+            <span>Acesso a Plataforma</span></a>
         </li>
   
         <!-- Divider -->
@@ -35,8 +35,8 @@
           </a>
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-              <a class="collapse-item" href="#">Sistemas para Internet</a>
-              <a class="collapse-item" href="#">Gestão Empresarial</a>
+              <a class="collapse-item" href="{% url 'vitrine:showcase_tipo_curso' 0 %}">Sistemas para Internet</a>
+              <a class="collapse-item" href="{% url 'vitrine:showcase_tipo_curso' 1 %}">Gestão Empresarial</a>
             </div>
           </div>
         </li>
@@ -50,8 +50,8 @@
             </a>
             <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-parent="#accordionSidebar">
               <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="#">Estágio</a>
-                <a class="collapse-item" href="#">Emprego</a>
+                <a class="collapse-item" href="{% url 'vitrine:showcase_tipo_vaga' 0 %}">Emprego</a>
+                <a class="collapse-item" href="{% url 'vitrine:showcase_tipo_vaga' 1 %}">Estágio</a>
               </div>
             </div>
           </li>

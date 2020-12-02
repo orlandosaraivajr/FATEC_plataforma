@@ -7,4 +7,6 @@ urlpatterns = [
     path('', views.showcase, name='showcase'),
     path('cadastro', views.cadastro, name='cadastro'),
     path('remover', views.remover, name='remover'),
+    path('curso/<int:curso>', views.showcase_tipo_curso, name='showcase_tipo_curso'),
+    path('tipo/<int:tipo_vaga>', views.showcase_tipo_vaga, name='showcase_tipo_vaga'),
 ]
