@@ -62,13 +62,13 @@ def remover(request):
                    'mensagem': 'Seu anúncio foi removido.'} 
         return render(request, 'cadastro_feito.html', context)
 
-# Create your views here.
-class VitrineList(generics.ListCreateAPIView):
+# API views here.
+class VitrineList(generics.ListAPIView):
 
-    queryset = VitrineModel.objects.all()
+    queryset = VitrineModel.objects.get_alunos()
     serializer_class = VitrineSerializer
 
-class VitrineDetail(generics.RetrieveUpdateDestroyAPIView):
+class VitrineDetail(generics.RetrieveAPIView):
 
-    queryset = VitrineModel.objects.all()
+    queryset = VitrineModel.objects.get_alunos()
     serializer_class = VitrineSerializer
