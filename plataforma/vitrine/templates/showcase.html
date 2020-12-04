@@ -33,7 +33,7 @@
                         <div class="row no-gutters align-items-center">
                           <div class="col mr-2">
                             <h3 class="card-title">{{ aluno.get_tipo_vaga_display }}</h3>
-                            <h5>{{ aluno.aluno.first_name }}</h5>
+                            <h5>{{ aluno.aluno.first_name }} {{ aluno.aluno.last_name }}</h5>
                             <h5>Curso: {{ aluno.get_curso_display }}</h5>
                             <p class="card-text mt-3">{{ aluno.descricao }}</p>
                             <div class="collapse" id="collapse_{{ aluno.pk }}">
