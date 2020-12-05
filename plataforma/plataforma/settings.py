@@ -7,7 +7,7 @@ SECRET_KEY = '33zwkv*=!#+2=^=)x*b1p&hf%u%7i&qax1g=&be!89!_b@ydns'
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '10.0.2.2']
 
 INSTALLED_APPS = [
     'jazzmin',
@@ -116,7 +116,4 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend'
     ],
-
-    #this bit makes the magic.
-    'UNICODE_JSON': False,
 }
