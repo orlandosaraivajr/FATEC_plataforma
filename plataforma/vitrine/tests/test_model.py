@@ -12,6 +12,8 @@ class VitrineModelTest(TestCase, CreateTestUser):
         data = self.create_user_student()
         self.client.post(r(self.login_url), data)
         self.student = User.objects.all()[0]
+        self.student.first_name = 'AlunoFatecano'
+        self.student.save()
         self.vitrine = VitrineModel(
             aluno=self.student,
             descricao='nenhuma descrição',
@@ -49,3 +51,6 @@ class VitrineModelTest(TestCase, CreateTestUser):
 
     def test_estudante(self):
         self.assertEqual(self.vitrine.aluno.id, self.student.pk)
+    
+    def test_str(self):
+        self.assertEqual(str(self.vitrine), 'AlunoFatecano - estudante@fatec.sp.gov.br')
