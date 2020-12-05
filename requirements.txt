@@ -43,3 +43,4 @@ wcwidth==0.2.4
 webencodings==0.5.1
 Django==2.2.13
 django-jazzmin==2.2.11
+django-filter==2.4.0

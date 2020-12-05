@@ -19,12 +19,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # INSTALLED APPS
     'django_extensions',
+    'rest_framework',
+    'django_filters',
     # LOCAL APPs
     'core.apps.CoreConfig',
     'estagio.apps.EstagioConfig',
     'manutencao.apps.ManutencaoConfig',
     'vitrine.apps.VitrineConfig',
-    'rest_framework',
 ]
 
 AUTH_USER_MODEL = 'core.User'
@@ -110,5 +111,9 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
 }
