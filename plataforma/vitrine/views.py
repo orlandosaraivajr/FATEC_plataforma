@@ -2,6 +2,14 @@ from django.shortcuts import render, redirect
 from core.decorators import area_student
 from vitrine.forms import VitrineForm
 from vitrine.models import VitrineModel
+from rest_framework import generics
+from .serializers import VitrineSerializer
+from django.http import Http404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 def showcase(request):
@@ -55,3 +63,22 @@ def remover(request):
         context = {'cabecalho': 'Plataforma FATEC - Módulo Vitrine',
                    'mensagem': 'Seu anúncio foi removido.'} 
         return render(request, 'cadastro_feito.html', context)
+
+# API views here.
+class VitrineList(generics.ListAPIView):
+    
+    queryset = VitrineModel.objects.get_alunos()
+    serializer_class = VitrineSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['tipo_vaga']
+
+class VitrineListVaga(generics.ListAPIView):
+    
+    # queryset = VitrineModel.objects.get_alunos()
+    serializer_class = VitrineSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['tipo_vaga']
+    def get_queryset(self):
+        tipo = self.kwargs['tipo']
+        queryset = VitrineModel.objects.get_tipo_vaga(tipo)
+        return queryset
