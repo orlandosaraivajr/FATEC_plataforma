@@ -24,41 +24,44 @@
 
         <!-- Begin Page Content -->
         <div class="container">
-            <div class="row">
+            
               {% if alunos %}
                 {% for aluno in alunos %}
-                  <div class="col-md-6">
-                    <div class="card border-left-primary shadow mb-4">
+                  <div class="col">
+                    <div class="card border-left-primary shadow mb-4 h">
                       <div class="card-body">
                         <div class="row no-gutters align-items-center">
                           <div class="col mr-2">
                             <h3 class="card-title">{{ aluno.get_tipo_vaga_display }}</h3>
+                            <hr/>
                             <h5>{{ aluno.aluno.first_name }} {{ aluno.aluno.last_name }}</h5>
                             <h5>Curso: {{ aluno.get_curso_display }}</h5>
                             <p class="card-text mt-3">{{ aluno.descricao }}</p>
                             <div class="collapse" id="collapse_{{ aluno.pk }}">
                               <div class="container p-0 d-inline-flex mb-3">
-                                {% if aluno.linkedin %}
-                                  <div class="col d-inline-flex p-0">
-                                    <a href="{{ aluno.linkedin }}" target="_blank">
-                                      <div class="d-inline-flex">
-                                        <h3 class="m-0"><i class="fab fa-linkedin"></i></h3>
-                                        <span class="mt-1 ml-2">Linkedin</span>
-                                      </div>
-                                    </a>
-                                  </div>
-                                {% endif %}
+                                <div class="row">
+                                  {% if aluno.linkedin %}
+                                    <div class="col-md">
+                                      <a href="{{ aluno.linkedin }}" target="_blank">
+                                        <div class="d-inline-flex">
+                                          <h3 class="m-0"><i class="fab fa-linkedin"></i></h3>
+                                          <span class="mt-1 ml-2">Linkedin</span>
+                                        </div>
+                                      </a>
+                                    </div>
+                                  {% endif %}
 
-                                {% if aluno.github %}
-                                  <div class="col d-inline-flex p-0">
-                                    <a href="{{ aluno.github }}" target="_blank">
-                                      <div class="d-inline-flex">
-                                        <h3 class="m-0"><i class="fab fa-github"></i></h3>
-                                        <span class="mt-1 ml-2">Github</span>
-                                      </div>
-                                    </a>
+                                  {% if aluno.github %}
+                                    <div class="col-md">
+                                      <a href="{{ aluno.github }}" target="_blank">
+                                        <div class="d-inline-flex">
+                                          <h3 class="m-0"><i class="fab fa-github"></i></h3>
+                                          <span class="mt-1 ml-2">Github</span>
+                                        </div>
+                                      </a>
+                                    </div>
+                                  {% endif %}
                                   </div>
-                                {% endif %}
                               </div>
                             </div>
                             <button class="btn btn-primary" type="button" 
@@ -77,7 +80,7 @@
                     <h1>Nenhum resultado encontrado!</h1>
                   </div>
               {% endif %}
-            </div>
+            
           </div>
     </div>
         {% include "rodape.html" %}
