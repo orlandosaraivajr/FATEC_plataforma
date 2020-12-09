@@ -29,7 +29,7 @@ class UserCreateFormTest_Data(TestCase):
     def test_email_malformed(self):
         form = self.make_validated_form(email='xyx')
         self.assertTrue(form.errors)
-        msg = '* Informe um endereço de email válido.'
+        msg = '* Insira um endereço de email válido.'
         self.assertEquals(form.errors['email'].as_text(), msg)
 
     def test_password_not_optional(self):
