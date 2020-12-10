@@ -63,7 +63,7 @@ class vitrine_PostOk(TestCase, CreateTestUser):
         self.assertEqual(200, self.resp.status_code)
 
     def test_saved_github(self):
-        cadastro_feito = VitrineModel.objects.filter(pk=self.aluno.pk)[0]
+        cadastro_feito = VitrineModel.objects.all()[0]
         self.assertEqual(
             cadastro_feito.github, 'https://github.com/orlandosaraivajr')
 
@@ -92,7 +92,7 @@ class vitrine_PostOk2(TestCase, CreateTestUser):
         self.assertEqual(200, self.resp.status_code)
 
     def test_saved_github(self):
-        cadastro_feito = VitrineModel.objects.filter(pk=self.aluno.pk)[0]
+        cadastro_feito = VitrineModel.objects.all()[0]
         self.assertEqual(
             cadastro_feito.github, 'https://github.com/orlandosaraivajr')
 
